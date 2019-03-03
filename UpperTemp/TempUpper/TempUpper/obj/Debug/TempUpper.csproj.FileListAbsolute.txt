@@ -1,0 +1,9 @@
+C:\Users\Yangyifan\Desktop\UpperTemp\TempUpper\TempUpper\bin\Debug\TempUpper.exe.config
+C:\Users\Yangyifan\Desktop\UpperTemp\TempUpper\TempUpper\bin\Debug\TempUpper.exe
+C:\Users\Yangyifan\Desktop\UpperTemp\TempUpper\TempUpper\bin\Debug\TempUpper.pdb
+C:\Users\Yangyifan\Desktop\UpperTemp\TempUpper\TempUpper\obj\Debug\TempUpper.csprojResolveAssemblyReference.cache
+C:\Users\Yangyifan\Desktop\UpperTemp\TempUpper\TempUpper\obj\Debug\TempUpper.Properties.Resources.resources
+C:\Users\Yangyifan\Desktop\UpperTemp\TempUpper\TempUpper\obj\Debug\TempUpper.csproj.GenerateResource.Cache
+C:\Users\Yangyifan\Desktop\UpperTemp\TempUpper\TempUpper\obj\Debug\TempUpper.exe
+C:\Users\Yangyifan\Desktop\UpperTemp\TempUpper\TempUpper\obj\Debug\TempUpper.pdb
+C:\Users\Yangyifan\Desktop\UpperTemp\TempUpper\TempUpper\obj\Debug\TempUpper.MainForm.resources
