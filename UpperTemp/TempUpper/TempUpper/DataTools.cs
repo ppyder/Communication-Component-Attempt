@@ -47,7 +47,7 @@ namespace TempUpper
             Int32 size = Marshal.SizeOf(Data);
             IntPtr buffer = Marshal.AllocHGlobal(size);
 
-            if ((StartIndex + size) > (bytes.Length - 1))
+            if ((StartIndex + size) > bytes.Length)
             {
                 Marshal.FreeHGlobal(buffer);
                 throw new Exception("<struct转Byte[]>:输入索引与待转换结构体长度之和超出数组范围！");

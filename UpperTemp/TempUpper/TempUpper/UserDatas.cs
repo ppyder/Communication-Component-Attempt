@@ -164,7 +164,7 @@ namespace TempUpper
         //起始位置指定：数据头数据在数据缓冲区中的位置
         public Globle_Datahead GetHeadData(byte[] Buffer, int StartIndex)
         {
-            if ((StartIndex + GetSize(typeof(Globle_Datahead)) > (Buffer.Length - 1)))
+            if ((StartIndex + GetSize(typeof(Globle_Datahead)) > Buffer.Length))
             {
                 throw new Exception("<获取数据头信息>:输入参数非法！");
             }
@@ -176,7 +176,7 @@ namespace TempUpper
         //起始位置指定：数据尾数据在数据缓冲区中的位置
         public Globle_Datatail GetTailData(byte[] Buffer, int StartIndex)
         {
-            if ((StartIndex + GetSize(typeof(Globle_Datatail)) > (Buffer.Length - 1)))
+            if ((StartIndex + GetSize(typeof(Globle_Datatail)) > Buffer.Length))
             {
                 throw new Exception("<获取数据尾信息>:输入参数非法！");
             }
@@ -190,7 +190,7 @@ namespace TempUpper
             uint check = 0;
 
             //获取数据尾数据
-            Globle_Datatail tempTail = GetTailData(Bytes, RxBufferSize - DataTailSize - 1);
+            Globle_Datatail tempTail = GetTailData(Bytes, RxBufferSize - DataTailSize);
 
             //获取校验值
             check = GetCheckValue(Bytes, 0, (uint)(RxDataContentSize));
@@ -208,7 +208,7 @@ namespace TempUpper
         {
             int HeadVerify = (int)BytesToStruct(Bytes, 4, typeof(int));
 
-            int check = Bytes[0] * Bytes[1] * Bytes[0] * Bytes[1];
+            int check = Bytes[0] * Bytes[1] * Bytes[2] * Bytes[3];
 
             return (check == HeadVerify);
         }

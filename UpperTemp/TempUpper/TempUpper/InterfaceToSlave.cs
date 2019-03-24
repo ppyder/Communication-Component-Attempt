@@ -375,13 +375,13 @@ namespace TempUpper
                     {
                         Rx_Buffer[BufferIndex] = Data;
 
+                        BufferIndex = 0;
+
                         //检查中间接收的第4.5.6.7个字节是否隐藏着真正的数据头
                         for(int i = 4; i < 8; i++)
                         {
                             GetFormatData(Rx_Buffer[i]);
                         }
-
-                        BufferIndex = 0;
                         return;
                     }
                     break;
