@@ -57,6 +57,7 @@
             this.btn_ClearRemark = new System.Windows.Forms.Button();
             this.tb_Remark = new System.Windows.Forms.TextBox();
             this.btn_test = new System.Windows.Forms.Button();
+            this.SendTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // btnSOpen
@@ -376,6 +377,11 @@
             this.btn_test.UseVisualStyleBackColor = true;
             this.btn_test.Click += new System.EventHandler(this.btn_test_Click);
             // 
+            // SendTimer
+            // 
+            this.SendTimer.Interval = 5;
+            this.SendTimer.Tick += new System.EventHandler(this.SendTimer_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -446,6 +452,7 @@
         private System.Windows.Forms.Button btn_ClearRemark;
         private System.Windows.Forms.TextBox tb_Remark;
         private System.Windows.Forms.Button btn_test;
+        private System.Windows.Forms.Timer SendTimer;
     }
 }
 

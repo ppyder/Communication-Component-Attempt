@@ -214,6 +214,9 @@ namespace TempUpper
                     //打开串口
                     Comunication.OpenSerialPort(cbSerial.SelectedItem.ToString());
 
+                    //使能发送定时器
+                    SendTimer.Enabled = true;
+
                     //设置必要控件不可用
                     cbSerial.Enabled = false;
                     cb_BaudRate.Enabled = false;
@@ -244,6 +247,9 @@ namespace TempUpper
                 try
                 {
                     Comunication.CloseSerialPort();
+
+                    //使能发送定时器
+                    SendTimer.Enabled = false;
                 }
                 catch (System.Exception ex)
                 {
@@ -274,8 +280,7 @@ namespace TempUpper
 
                 //发出计时器清零指令
                 Comunication.Datas.Tx_TestCtrlCMD.CMD = 0x01;
-                Comunication.SendRequest = UserDatas.MsgTypesID.TestCtrl;
-                Comunication.SendData();
+                Comunication.SendRequest = UserDatas.MsgTypesID.Tx_SampleCMD;
 
                 btn_record.Text = "停止记录";
             }
@@ -286,8 +291,7 @@ namespace TempUpper
 
                 //发出结束计时指令
                 Comunication.Datas.Tx_TestCtrlCMD.CMD = 0x00;
-                Comunication.SendRequest = UserDatas.MsgTypesID.TestCtrl;
-                Comunication.SendData();
+                Comunication.SendRequest = UserDatas.MsgTypesID.Tx_SampleCMD;
 
                 //标记当前不需要记录数据
                 isReadyToWrite = false;
@@ -301,8 +305,8 @@ namespace TempUpper
         {
             //发出结束计时指令
             Comunication.Datas.Tx_TestCtrlCMD.CMD = 0x00;
-            Comunication.SendRequest = UserDatas.MsgTypesID.TestCtrl;
-            Comunication.SendData();
+            Comunication.SendRequest = UserDatas.MsgTypesID.Tx_SampleCMD;
+
         }
 
         //清空计数器按钮
@@ -430,6 +434,13 @@ namespace TempUpper
             lb_PackReceivedNum.Text = Comunication.PackReceived.ToString() + "组";
             lb_ByteReceivedNum.Text = Comunication.ByteReceived.ToString() + "Byte(s)";
             lb_ErrorPackNum.Text = Comunication.ErrorPackReceived.ToString() + "包";
+        }
+
+        //5ms发送一次消息
+        private void SendTimer_Tick(object sender, EventArgs e)
+        {
+            //5ms产生一个发送请求
+            Comunication.SendData();
         }
 
         #endregion
@@ -576,10 +587,6 @@ namespace TempUpper
             }
         }
 
-
-
         #endregion
-
-        
     }
 }

@@ -471,7 +471,7 @@ namespace TempUpper
                     byte[] Buffer = new byte[n];
 
                     //获得实际数据缓冲区
-                    for(int i = 0; i < n; i++)
+                    for (int i = 0; i < n; i++)
                     {
                         Buffer[i] = TempBuffer[i];
                     }
@@ -653,11 +653,19 @@ namespace TempUpper
         //发送指令
         public void SendData()
         {
+            byte[] DataToSend = DealDataToSend();
+
+            //如果待发送的数据缓冲区为空则不进行发送操作
+            if (null == DataToSend || 0 == DataToSend.Length)
+            {
+                return;
+            }
+
             if (Series.isopen == true)
             {
                 try
                 {
-                    Series_SendData(DealDataToSend());
+                    Series_SendData(DataToSend);
                 }
                 catch (System.Exception ex)
                 {
@@ -668,7 +676,7 @@ namespace TempUpper
             {
                 try
                 {
-                    NetSendData(DealDataToSend());
+                    NetSendData(DataToSend);
                 }
                 catch (System.Exception ex)
                 {
@@ -682,6 +690,12 @@ namespace TempUpper
         }
         public void SendData(byte[] SendBuffer)
         {
+            //如果输入的发送缓冲区为空则报错
+            if (null == SendBuffer || 0 == SendBuffer.Length)
+            {
+                throw new Exception("<数据发送>:传入发送函数的数据缓冲区为空!\n");
+            }
+
             if (Series.isopen == true)
             {
                 try

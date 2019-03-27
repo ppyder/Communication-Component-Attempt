@@ -30,7 +30,7 @@ namespace TempUpper
         //标志
         private bool isShowInHex = true;
         private bool isTimeValid = true;
-        private bool isRandomDataValid = true;
+        private bool isRandomDataValid = false;
 
         //状态属性：接收到的包数量
         public UInt64 PackReceived
@@ -160,7 +160,14 @@ namespace TempUpper
             }
             else
             {
-                throw new Exception("<文本缓冲区>:保存的字符已经达到规定的上限！");
+                if (this.isRandomDataValid)
+                {
+                    throw new Exception("<文本缓冲区>:保存的字符已经达到规定的上限！");
+                }
+                else
+                {
+                    ReceiveStrBuffer = "";
+                }
             }
         }
         #endregion
@@ -180,9 +187,9 @@ namespace TempUpper
             Rx_Buffer = new byte[Datas.RxBufferSize];
 
             //初始化发送请求队列
-            SendFlags.Request0 = UserDatas.MsgTypesID.TestCtrl;
-            SendFlags.Request1 = UserDatas.MsgTypesID.TestCtrl;
-            SendFlags.Request2 = UserDatas.MsgTypesID.TestCtrl;
+            SendFlags.Request0 = UserDatas.MsgTypesID.Rx_EmptyData;
+            SendFlags.Request1 = UserDatas.MsgTypesID.Rx_EmptyData;
+            SendFlags.Request2 = UserDatas.MsgTypesID.Rx_EmptyData;
 
             //允许上位机先发数据
             COM_log.isCouldSendMessage = true;            
@@ -212,7 +219,7 @@ namespace TempUpper
         //重置发送标志以重新激活发送动作
         public void ReConnectSlave()
         {
-            COM_log.MsgFeedback_ToSlave = UserDatas.MsgTypesID.Data_Error;
+            COM_log.MsgFeedback_ToSlave = UserDatas.MsgTypesID.Tx_ErrorData;
             COM_log.isCouldSendMessage = true;
 
             SendData();
@@ -245,15 +252,15 @@ namespace TempUpper
             set
             {
                 //查询请求队列并赋值
-                if (SendFlags.Request0 == UserDatas.MsgTypesID.TestCtrl)
+                if (SendFlags.Request0 == UserDatas.MsgTypesID.Rx_EmptyData)
                 {
                     SendFlags.Request0 = value;
                 }
-                else if (SendFlags.Request1 == UserDatas.MsgTypesID.TestCtrl)
+                else if (SendFlags.Request1 == UserDatas.MsgTypesID.Rx_EmptyData)
                 {
                     SendFlags.Request1 = value;
                 }
-                else if (SendFlags.Request2 == UserDatas.MsgTypesID.TestCtrl)
+                else if (SendFlags.Request2 == UserDatas.MsgTypesID.Rx_EmptyData)
                 {
                     SendFlags.Request2 = value;
                 }
@@ -277,7 +284,7 @@ namespace TempUpper
                 //前移发送请求
                 SendFlags.Request0 = SendFlags.Request1;
                 SendFlags.Request1 = SendFlags.Request2;
-                SendFlags.Request2 = UserDatas.MsgTypesID.TestCtrl;
+                SendFlags.Request2 = UserDatas.MsgTypesID.Rx_EmptyData;
 
                 //记录将被发送的数据类型
                 COM_log.HaveSendID = MsgToSend;
@@ -496,8 +503,8 @@ namespace TempUpper
                 SaveInfo("错误包：" + strRcv + "\r\n");
 
                 //向下位机标识本次接收到的数据类型
-                COM_log.MsgFeedback_ToSlave = UserDatas.MsgTypesID.Data_Error;
-                COM_log.MsgFeedback_FromSlave = UserDatas.MsgTypesID.Data_Error;
+                COM_log.MsgFeedback_ToSlave = UserDatas.MsgTypesID.Rx_ErrorData;
+                COM_log.MsgFeedback_FromSlave = UserDatas.MsgTypesID.Rx_ErrorData;
             }
 
             //接收到数据包，意味着下位机完成了一次有效发送，即进入等待回应的状态，允许上位机发送数据
