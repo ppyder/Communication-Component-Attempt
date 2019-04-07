@@ -379,7 +379,7 @@
             // 
             // SendTimer
             // 
-            this.SendTimer.Interval = 5;
+            this.SendTimer.Interval = 1;
             this.SendTimer.Tick += new System.EventHandler(this.SendTimer_Tick);
             // 
             // MainForm

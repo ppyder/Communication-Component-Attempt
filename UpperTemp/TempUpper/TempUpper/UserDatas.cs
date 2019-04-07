@@ -173,6 +173,22 @@ namespace TempUpper
                     Msg = Tx_TestCtrlCMD;
                     break;
 
+                case MsgTypesID.Tx_BaseMotionCMD:
+                    Msg = Tx_BaseMotionCMD;
+                    break;
+
+                case MsgTypesID.Tx_PlanMotionTestCMD:
+                    Msg = Tx_PlanCtrlCMD;
+                    break;
+
+                case MsgTypesID.Tx_AutoProcessCMD:
+                    Msg = Tx_MR1AutoCtrlCMD;
+                    break;
+
+                case MsgTypesID.Tx_UpperActionDebugCMD:
+                    Msg = Tx_ActionDebugCMD;
+                    break;
+
                 default:
                     Msg = null;
                     break;
@@ -198,13 +214,13 @@ namespace TempUpper
         }
         
         //处理下位机传上来的采样数据
-        private MsgTypesID GetTestData(byte[] Buffer)
+        private MsgTypesID GetSampleData(byte[] Buffer)
         {
             double[] Datas = new double[4];
-            TestData Rx_TestData = new TestData();
+            SampleData Rx_TestData = new SampleData();
 
             //将数据写入缓冲区
-            Rx_TestData = (TestData)BytesToStruct(Buffer, GetSize(typeof(Globle_Datahead)), typeof(TestData));
+            Rx_TestData = (SampleData)BytesToStruct(Buffer, GetSize(typeof(Globle_Datahead)), typeof(SampleData));
 
             Datas[0] = Rx_TestData.Time;
 
@@ -219,6 +235,98 @@ namespace TempUpper
 
             return MsgTypesID.Rx_SampleData;
         }
+
+        //处理下位机传上来的基本运动状态数据
+        private MsgTypesID GetBaseMotionData(byte[] Buffer)
+        {
+            //double[] Datas = new double[4];
+            //SampleData Rx_TestData = new SampleData();
+
+            ////将数据写入缓冲区
+            //Rx_TestData = (SampleData)BytesToStruct(Buffer, GetSize(typeof(Globle_Datahead)), typeof(SampleData));
+
+            //Datas[0] = Rx_TestData.Time;
+
+            //Datas[1] = Rx_TestData.InputData;
+
+            //Datas[2] = Rx_TestData.OutputData;
+
+            //Datas[3] = Rx_TestData.OutputUc;
+
+            ////调用写入数据的方法
+            ////ParentForm.WriteinData(Datas);
+
+            return MsgTypesID.Rx_BaseMotionData;
+        }
+
+        //处理下位机传上来的采样数据
+        private MsgTypesID GetPlanTestData(byte[] Buffer)
+        {
+            //double[] Datas = new double[4];
+            //SampleData Rx_TestData = new SampleData();
+
+            ////将数据写入缓冲区
+            //Rx_TestData = (SampleData)BytesToStruct(Buffer, GetSize(typeof(Globle_Datahead)), typeof(SampleData));
+
+            //Datas[0] = Rx_TestData.Time;
+
+            //Datas[1] = Rx_TestData.InputData;
+
+            //Datas[2] = Rx_TestData.OutputData;
+
+            //Datas[3] = Rx_TestData.OutputUc;
+
+            ////调用写入数据的方法
+            ////ParentForm.WriteinData(Datas);
+
+            return MsgTypesID.Rx_PlanMotionTestData;
+        }
+
+        //处理下位机传上来的采样数据
+        private MsgTypesID GetAutoProcessData(byte[] Buffer)
+        {
+            //double[] Datas = new double[4];
+            //SampleData Rx_TestData = new SampleData();
+
+            ////将数据写入缓冲区
+            //Rx_TestData = (SampleData)BytesToStruct(Buffer, GetSize(typeof(Globle_Datahead)), typeof(SampleData));
+
+            //Datas[0] = Rx_TestData.Time;
+
+            //Datas[1] = Rx_TestData.InputData;
+
+            //Datas[2] = Rx_TestData.OutputData;
+
+            //Datas[3] = Rx_TestData.OutputUc;
+
+            ////调用写入数据的方法
+            ////ParentForm.WriteinData(Datas);
+
+            return MsgTypesID.Rx_AutoProcessData;
+        }
+
+        //处理下位机传上来的采样数据
+        private MsgTypesID GetActionTestData(byte[] Buffer)
+        {
+            //double[] Datas = new double[4];
+            //SampleData Rx_TestData = new SampleData();
+
+            ////将数据写入缓冲区
+            //Rx_TestData = (SampleData)BytesToStruct(Buffer, GetSize(typeof(Globle_Datahead)), typeof(SampleData));
+
+            //Datas[0] = Rx_TestData.Time;
+
+            //Datas[1] = Rx_TestData.InputData;
+
+            //Datas[2] = Rx_TestData.OutputData;
+
+            //Datas[3] = Rx_TestData.OutputUc;
+
+            ////调用写入数据的方法
+            ////ParentForm.WriteinData(Datas);
+
+            return MsgTypesID.Rx_UpperActionDebugData;
+        }
         #endregion
         #endregion
 
@@ -230,9 +338,13 @@ namespace TempUpper
 
             DataDealFuncs = new DealFunc[(int)MsgTypesID.RxMaxCode]
             {
-                new DealFunc(GetErrorData),
-                new DealFunc(GetEmptyData),
-                new DealFunc(GetTestData),
+                new DealFunc(GetErrorData),     //接收到错误数据
+                new DealFunc(GetEmptyData),     //接收到空数据
+                new DealFunc(GetSampleData),    //接收到采样数据
+                new DealFunc(GetBaseMotionData),//接收到基本运动数据
+                new DealFunc(GetPlanTestData),  //接收到规划测试数据
+                new DealFunc(GetAutoProcessData),//接收到自动流程控制数据
+                new DealFunc(GetActionTestData),//上层动作测试反馈数据
             };
 
             return;

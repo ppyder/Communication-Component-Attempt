@@ -13,7 +13,7 @@ namespace TempUpper
     public class InterfaceToSlave : ComEntity  //继承通信实体类
     {
         #region 通用组件
-
+        
         //数据接收缓冲区
         private byte[] Rx_Buffer;
         private int BufferIndex = 0;

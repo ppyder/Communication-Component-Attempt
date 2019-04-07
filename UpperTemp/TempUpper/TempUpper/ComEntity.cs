@@ -634,7 +634,7 @@ namespace TempUpper
 
         //处理数据的虚函数，由继承类实现
         protected virtual void ReceiveData(byte[] Buffer) { }
-        protected virtual byte[] DealDataToSend() { return new byte[0]; }
+        protected virtual byte[] DealDataToSend() { return null; }
 
         //通信实体构造函数
         public ComEntity()
