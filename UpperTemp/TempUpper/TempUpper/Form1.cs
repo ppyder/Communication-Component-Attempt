@@ -447,6 +447,11 @@ namespace TempUpper
 
         #region 数据更新和初始化操作
 
+        private void DealSampleData(UserDatas.SampleData Data)
+        {
+
+        }
+
         //程序初始化时进行的操作
         private void InitProgram()
         {
@@ -461,6 +466,9 @@ namespace TempUpper
 
             //预置界面参数
             InitFormCBData();
+
+            //初始化处理方法
+            Datas.SampleHandlerInit(new UserDatas.SampleDataHandlerTypedef(DealSampleData));
         }
 
         //扫描电脑当前的串口并更新到下拉框中

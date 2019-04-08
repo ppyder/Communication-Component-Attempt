@@ -322,6 +322,8 @@ namespace TempUpper
 
                 //写入数据尾
                 Datas.StructToBytes(Datas.Tx_Datatail, ref DataToSend, Datas.DataHeadSize + Datas.TxDataContentSize);
+
+                COM_log.isCouldSendMessage = false;
             }
             else
             {

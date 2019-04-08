@@ -199,6 +199,31 @@ namespace TempUpper
         #endregion
 
         #region 自定义数据解析
+
+        #region 由回调操作产生的委托集合
+
+        //采样数据处理委托
+        public delegate void SampleDataHandlerTypedef(SampleData Data);
+        //委托实体字段
+        private SampleDataHandlerTypedef SampleDataHandler = null;
+        //初始化委托
+        public void SampleHandlerInit(SampleDataHandlerTypedef Handler)
+        {
+            SampleDataHandler = Handler;
+        }
+
+        //PID数据回传处理委托
+        public delegate void PIDDataHandlerTypedef(PIDDataGetTypedef Data);
+        //委托实体字段
+        private PIDDataHandlerTypedef PIDDataHandler = null;
+        //初始化委托
+        public void PIDDataHandlerInit(PIDDataHandlerTypedef Handler)
+        {
+            PIDDataHandler = Handler;
+        }
+
+        #endregion
+
         //处理下位机传上来的异常数据
         private MsgTypesID GetErrorData(byte[] Buffer)
         {
@@ -216,22 +241,18 @@ namespace TempUpper
         //处理下位机传上来的采样数据
         private MsgTypesID GetSampleData(byte[] Buffer)
         {
-            double[] Datas = new double[4];
-            SampleData Rx_TestData = new SampleData();
-
             //将数据写入缓冲区
-            Rx_TestData = (SampleData)BytesToStruct(Buffer, GetSize(typeof(Globle_Datahead)), typeof(SampleData));
-
-            Datas[0] = Rx_TestData.Time;
-
-            Datas[1] = Rx_TestData.InputData;
-
-            Datas[2] = Rx_TestData.OutputData;
-
-            Datas[3] = Rx_TestData.OutputUc;
+            Rx_SampleData = (SampleData)BytesToStruct(Buffer, GetSize(typeof(Globle_Datahead)), typeof(SampleData));
 
             //调用写入数据的方法
-            //ParentForm.WriteinData(Datas);
+            if (null == SampleDataHandler)
+            {
+                throw new Exception("<调用采样数据处理函数>：未初始化采样数据处理委托！请先调用函数\"SampleHandlerInit\"以初始化！");
+            }
+            else
+            {
+                SampleDataHandler(Rx_SampleData);
+            }
 
             return MsgTypesID.Rx_SampleData;
         }
@@ -239,93 +260,95 @@ namespace TempUpper
         //处理下位机传上来的基本运动状态数据
         private MsgTypesID GetBaseMotionData(byte[] Buffer)
         {
-            //double[] Datas = new double[4];
-            //SampleData Rx_TestData = new SampleData();
+            BaseMotionDataTypedef Rx_BaseMotionMsg;
 
-            ////将数据写入缓冲区
-            //Rx_TestData = (SampleData)BytesToStruct(Buffer, GetSize(typeof(Globle_Datahead)), typeof(SampleData));
+            //将数据更新
+            Rx_BaseMotionMsg = (BaseMotionDataTypedef)BytesToStruct(Buffer, GetSize(typeof(Globle_Datahead)), typeof(BaseMotionDataTypedef));
 
-            //Datas[0] = Rx_TestData.Time;
+            Rx_MR1State.Speed = Rx_BaseMotionMsg.Speed;
+            Rx_MR1State.SpeedDir = Rx_BaseMotionMsg.SpeedDir;
+            Rx_MR1State.RotateSpeed = Rx_BaseMotionMsg.RotateSpeed;
 
-            //Datas[1] = Rx_TestData.InputData;
-
-            //Datas[2] = Rx_TestData.OutputData;
-
-            //Datas[3] = Rx_TestData.OutputUc;
-
-            ////调用写入数据的方法
-            ////ParentForm.WriteinData(Datas);
+            Rx_MR1State.CoordinateX = Rx_BaseMotionMsg.CoordinateX;
+            Rx_MR1State.CoordinateY = Rx_BaseMotionMsg.CoordinateY;
+            Rx_MR1State.PoseAngle = Rx_BaseMotionMsg.PoseAngle;
 
             return MsgTypesID.Rx_BaseMotionData;
         }
 
-        //处理下位机传上来的采样数据
+        //处理下位机传上来的路径规划测试状态参量
         private MsgTypesID GetPlanTestData(byte[] Buffer)
         {
-            //double[] Datas = new double[4];
-            //SampleData Rx_TestData = new SampleData();
+            BasePlanDataTypedef Rx_PlanMotionMsg;
 
-            ////将数据写入缓冲区
-            //Rx_TestData = (SampleData)BytesToStruct(Buffer, GetSize(typeof(Globle_Datahead)), typeof(SampleData));
+            //将数据更新
+            Rx_PlanMotionMsg = (BasePlanDataTypedef)BytesToStruct(Buffer, GetSize(typeof(Globle_Datahead)), typeof(BasePlanDataTypedef));
 
-            //Datas[0] = Rx_TestData.Time;
+            Rx_MR1State.isPlanSuccessfully = (0 != Rx_PlanMotionMsg.isPlanSuccessfully);
+            Rx_MR1State.SectionFlag = Rx_PlanMotionMsg.SectionFlag;
 
-            //Datas[1] = Rx_TestData.InputData;
+            Rx_MR1State.DistanceHaveMoved = Rx_PlanMotionMsg.DistanceHaveMoved;
+            Rx_MR1State.FullDistance = Rx_PlanMotionMsg.FullDistance;
 
-            //Datas[2] = Rx_TestData.OutputData;
-
-            //Datas[3] = Rx_TestData.OutputUc;
-
-            ////调用写入数据的方法
-            ////ParentForm.WriteinData(Datas);
+            Rx_MR1State.CoordinateX = Rx_PlanMotionMsg.CoordinateX;
+            Rx_MR1State.CoordinateY = Rx_PlanMotionMsg.CoordinateY;
+            Rx_MR1State.PoseAngle = Rx_PlanMotionMsg.PoseAngle;
 
             return MsgTypesID.Rx_PlanMotionTestData;
         }
 
-        //处理下位机传上来的采样数据
+        //处理下位机传上来的自动流程状态参量
         private MsgTypesID GetAutoProcessData(byte[] Buffer)
         {
-            //double[] Datas = new double[4];
-            //SampleData Rx_TestData = new SampleData();
+            MR1CtrlDataTypedef Rx_MR1AutoMotionMsg;
 
-            ////将数据写入缓冲区
-            //Rx_TestData = (SampleData)BytesToStruct(Buffer, GetSize(typeof(Globle_Datahead)), typeof(SampleData));
+            //将数据更新
+            Rx_MR1AutoMotionMsg = (MR1CtrlDataTypedef)BytesToStruct(Buffer, GetSize(typeof(Globle_Datahead)), typeof(MR1CtrlDataTypedef));
 
-            //Datas[0] = Rx_TestData.Time;
+            Rx_MR1State.isAutoMode = (0 != Rx_MR1AutoMotionMsg.isAutoMode);
+            Rx_MR1State.CurrentState = Rx_MR1AutoMotionMsg.CurrentState;
+            Rx_MR1State.isActionDoing = (0 != Rx_MR1AutoMotionMsg.isActionDoing);
 
-            //Datas[1] = Rx_TestData.InputData;
-
-            //Datas[2] = Rx_TestData.OutputData;
-
-            //Datas[3] = Rx_TestData.OutputUc;
-
-            ////调用写入数据的方法
-            ////ParentForm.WriteinData(Datas);
+            Rx_MR1State.CoordinateX = Rx_MR1AutoMotionMsg.CoordinateX;
+            Rx_MR1State.CoordinateY = Rx_MR1AutoMotionMsg.CoordinateY;
+            Rx_MR1State.PoseAngle = Rx_MR1AutoMotionMsg.PoseAngle;
 
             return MsgTypesID.Rx_AutoProcessData;
         }
 
-        //处理下位机传上来的采样数据
+        //处理下位机传上来的动作Debug状态数据
         private MsgTypesID GetActionTestData(byte[] Buffer)
         {
-            //double[] Datas = new double[4];
-            //SampleData Rx_TestData = new SampleData();
+            ActionDebugDataTypedef Rx_ActionDebugMsg;
 
-            ////将数据写入缓冲区
-            //Rx_TestData = (SampleData)BytesToStruct(Buffer, GetSize(typeof(Globle_Datahead)), typeof(SampleData));
+            //将数据更新
+            Rx_ActionDebugMsg = (ActionDebugDataTypedef)BytesToStruct(Buffer, GetSize(typeof(Globle_Datahead)), typeof(ActionDebugDataTypedef));
 
-            //Datas[0] = Rx_TestData.Time;
-
-            //Datas[1] = Rx_TestData.InputData;
-
-            //Datas[2] = Rx_TestData.OutputData;
-
-            //Datas[3] = Rx_TestData.OutputUc;
-
-            ////调用写入数据的方法
-            ////ParentForm.WriteinData(Datas);
+            Rx_MR1State.PickMotorPos = Rx_ActionDebugMsg.PickMotorPos;
+            Rx_MR1State.ShootMotorSpeed = Rx_ActionDebugMsg.ShootMotorSpeed;
 
             return MsgTypesID.Rx_UpperActionDebugData;
+        }
+
+        //处理下位机传上来的PID数据
+        private MsgTypesID GetPIDData(byte[] Buffer)
+        {
+            PIDDataGetTypedef Rx_PIDData = new PIDDataGetTypedef();
+
+            //将数据写入缓冲区
+            Rx_PIDData = (PIDDataGetTypedef)BytesToStruct(Buffer, GetSize(typeof(Globle_Datahead)), typeof(PIDDataGetTypedef));
+
+            //调用写入数据的方法
+            if (null == PIDDataHandler)
+            {
+                throw new Exception("<调用PID数据处理函数>：未初始化数据处理委托！请先调用函数\"PIDDataHandlerInit\"以初始化！");
+            }
+            else
+            {
+                PIDDataHandler(Rx_PIDData);
+            }
+
+            return MsgTypesID.Rx_PIDData;
         }
         #endregion
         #endregion
@@ -345,6 +368,7 @@ namespace TempUpper
                 new DealFunc(GetPlanTestData),  //接收到规划测试数据
                 new DealFunc(GetAutoProcessData),//接收到自动流程控制数据
                 new DealFunc(GetActionTestData),//上层动作测试反馈数据
+                new DealFunc(GetPIDData),       //接收到下位机回传的PID数据
             };
 
             return;

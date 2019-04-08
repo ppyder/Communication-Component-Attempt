@@ -45,9 +45,9 @@ namespace TempUpper
         public struct SampleCtrlCMD
         {
             public byte CMD;        //指令
-            public byte Reserve1;   //预留
-            public byte Reserve2;   //预留
-            public byte Reserve3;   //预留
+            byte Reserve1;   //预留
+            byte Reserve2;   //预留
+            byte Reserve3;   //预留
         }
 
         #endregion
@@ -68,7 +68,7 @@ namespace TempUpper
             public byte PickCMD;    //抓取指令（无动作0，先放下来开爪1，对位，再合爪归位释放2）
             public byte ShootCMD;   //发射指令(取兽骨的爪释放后自动后撤，发射完自动复位。无动作0，发射1，未完成后撤或复位时发射指令)无效)
             public byte HandoverCMD;//交接指令(无动作0，大气缸伸出1，缩回2，释放令牌3)
-            public byte Reserve;    //预留占位
+            byte Reserve;    //预留占位
 
         };
 
@@ -102,7 +102,7 @@ namespace TempUpper
             public byte MotionCMD;      //运动控制指令（1为开始运动，0为停止运动）
             public byte isParamsValid;  //指示本次发送下述参量是否有效
             public byte isLockHead;     //标记运动过程中是否锁头
-            public byte Reserve;        //预留占位符
+            byte Reserve;        //预留占位符
 
             //规划运动输入参量
             public int CoordinateX;    //目标坐标X
@@ -127,7 +127,7 @@ namespace TempUpper
         {
             //规划运动返回参量
             public byte isPlanSuccessfully; //标记是否生成路径成功
-            public byte SectionFlag;     //路段标志
+            public byte SectionFlag;        //路段标志
 
             //运动状态参量
             public float DistanceHaveMoved; //已经走过的路程
@@ -173,9 +173,9 @@ namespace TempUpper
         {
             //流程控制部分
             public byte isAutoMode;     //标记是否是全自动模式
-            public byte CurrentState;//标记当前的流程号
+            public byte CurrentState;   //标记当前的流程号
             public byte isActionDoing;  //标记上层动作是否在进行中
-            public byte Reserve;     //保留占位
+            byte Reserve;     //保留占位
 
             //返回实时坐标X
             public float CoordinateX;
@@ -210,6 +210,94 @@ namespace TempUpper
 
         #endregion
 
+        #region PID设置指令
+
+        //枚举定义：PID的ID列表
+        enum PID_IDList
+        {
+            PID_SingleMotor = 0x00,    //单电机PID
+
+        };
+
+        //PID设置指令
+        public struct PIDDataSetTypedef
+        {
+            public byte isSetParam;    //标记是否是设置参数(若为假，则是向下位机索取参数)
+            public byte SetTarget;     //标记被设置/索取的目标
+            byte Reserve1;              //预留占位符1
+            byte Reserve2;              //预留占位符1
+
+            public float Kp;
+            public float Ki;
+            public float Kd;
+
+            public float I_e_Threshold;    //决定是否使用积分的误差上限
+
+            public float I_Max;            //积分限幅
+            public float OutMax;           //输出限幅
+
+        };
+
+        //获取PID设置值
+        public struct PIDDataGetTypedef
+        {
+            public byte PID_ID;     //标记所返回的目标对应的标签
+            byte Reserve1;          //预留占位符1
+            byte Reserve2;          //预留占位符2
+            byte Reserve3;          //预留占位符3
+
+            public float Kp;
+            public float Ki;
+            public float Kd;
+
+            public float I_e_Threshold;    //决定是否使用积分的误差上限
+
+            public float I_Max;            //积分限幅
+            public float OutMax;           //输出限幅
+
+        };
+
+        #endregion
+        #endregion
+
+        #region 公示的状态参量
+
+        public struct Mr1State
+        {
+            /*****************  通用  ******************/
+            //底盘速度大小（模，单位mm/s）
+            public float Speed;
+            //底盘速度方向（基于全局定位坐标系，单位°）
+            public float SpeedDir;
+            //底盘自旋角速度，从上往下看逆时针为正
+            public float RotateSpeed;
+
+            //返回坐标X
+            public float CoordinateX;
+            //返回坐标Y
+            public float CoordinateY;
+            //基于全局定位坐标系的姿态角
+            public float PoseAngle;
+
+            /*****************  规划运动  ******************/
+            //规划运动返回参量
+            public bool isPlanSuccessfully; //标记是否生成路径成功
+            public byte SectionFlag;     //路段标志
+
+            //运动状态参量
+            public float DistanceHaveMoved; //已经走过的路程
+            public float FullDistance;      //路段全长
+
+            /*****************  流程控制  ******************/
+            public bool isAutoMode;     //标记是否是全自动模式
+            public byte CurrentState;//标记当前的流程号
+            public bool isActionDoing;  //标记上层动作是否在进行中
+
+            /*****************  上层测试  ******************/
+            public ushort PickMotorPos;    //抓取电机的位置(待标定)
+            public ushort ShootMotorSpeed; //发射电机的速度（机构向前推为负，单位mm/s）
+        };
+
         #endregion
 
         #region 常量和枚举标识
@@ -234,7 +322,9 @@ namespace TempUpper
             Tx_AutoProcessCMD,
             //6 - 上层动作debug状态参量
             Tx_UpperActionDebugCMD,
-            //7 - 待发送的数据的编码最大值，用做安全检查
+            //7 - 设置PID参数的指令
+            Tx_PIDSetCMD,
+            //待发送的数据的编码最大值，用做安全检查
             TxMaxCode,
 
             /************  接收组  *************/
@@ -252,6 +342,8 @@ namespace TempUpper
             Rx_AutoProcessData,
             //6 - 上层动作debug状态参量
             Rx_UpperActionDebugData,
+            //7 - PID参数返回值
+            Rx_PIDData,
             //接收到的数据的编码最大值，用做安全检查
             RxMaxCode             
 
@@ -264,12 +356,16 @@ namespace TempUpper
         public Globle_Datahead Tx_Datahead = new Globle_Datahead();
         //数据尾
         public Globle_Datatail Tx_Datatail = new Globle_Datatail();
-        //数据内容缓冲区
+        //发送数据内容缓冲区
         public SampleCtrlCMD            Tx_TestCtrlCMD = new SampleCtrlCMD();
         public BaseMotionCMDTypedef     Tx_BaseMotionCMD = new BaseMotionCMDTypedef();
         public BasePlanCtrlCMDTypedef   Tx_PlanCtrlCMD = new BasePlanCtrlCMDTypedef();
         public MR1CtrlCMDTypedef        Tx_MR1AutoCtrlCMD = new MR1CtrlCMDTypedef();
         public ActionDebugCMDTypedef    Tx_ActionDebugCMD = new ActionDebugCMDTypedef();
+        public PIDDataSetTypedef        Tx_PIDSetCMD = new PIDDataSetTypedef();
+        //接收到的状态参量公示(未公示的接收参量将在接收回调中得到处理)
+        public SampleData               Rx_SampleData = new SampleData(); //此状态量也会在回调中被处理
+        public Mr1State                 Rx_MR1State = new Mr1State();
 
         private byte EmptyTxBuffer = new byte();
 
@@ -289,7 +385,8 @@ namespace TempUpper
                                 typeof(BaseMotionDataTypedef),
                                 typeof(BasePlanDataTypedef),
                                 typeof(MR1CtrlDataTypedef),
-                                typeof(ActionDebugDataTypedef));
+                                typeof(ActionDebugDataTypedef),
+                                typeof(PIDDataGetTypedef));
 
             //初始化通用发送缓冲区长度
             MaxTxBufferSize = GetSize(typeof(Globle_Datahead))
@@ -298,7 +395,8 @@ namespace TempUpper
                                 typeof(BaseMotionCMDTypedef),
                                 typeof(BasePlanCtrlCMDTypedef),
                                 typeof(MR1CtrlCMDTypedef),
-                                typeof(ActionDebugCMDTypedef));
+                                typeof(ActionDebugCMDTypedef),
+                                typeof(PIDDataSetTypedef));
         }
 
     }

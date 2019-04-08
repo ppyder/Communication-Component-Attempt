@@ -331,7 +331,7 @@ namespace TempUpper
                 catch (Exception ex)
                 {
                     SaveInfo("<串口接收>:" + ex.Message + "\r\n");
-                    th.Join();
+                    //th.Join();
                 }
 
             }
