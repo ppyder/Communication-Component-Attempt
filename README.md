@@ -144,7 +144,6 @@ Develop COM methods.
         2. 记录的驳回次数达到所允许的最大值；
     - 一次发送结束后，将驳回次数计数器清零。
     - 一次接收结束后，将``isGetMsg``标志置一。
-  * <font color ="brown">求和校验</font>
 
 ### 3.易于自定义和扩展的通信协议
 
@@ -163,4 +162,4 @@ Develop COM methods.
 + **<待填充>**
 
 
-#### <font color ="purple">@ppyder</font> 2019.03.03
+#### <font color ="purple">@ppyder</font> 2019.04.11
