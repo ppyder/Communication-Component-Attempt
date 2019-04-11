@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>HERO Library: IO_Device操作函数</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../RobotLogo_png.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">HERO Library
+   &#160;<span id="projectnumber">2018/10/20</span>
+   </div>
+   <div id="projectbrief">This is HERO&#39;s code library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',false,false,'search.php','搜索');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">函数</a>  </div>
+  <div class="headertitle">
+<div class="title">IO_Device操作函数<div class="ingroups"><a class="el" href="../../d0/d25/group___hero_library.html">HERO团队代码库</a> &raquo; <a class="el" href="../../d9/d70/group___low___level___library.html">Low Level Library(底层库)</a> &raquo; <a class="el" href="../../d5/da6/group___interface___to___middle_tier.html">Interface(与中间层的抽象接口)</a> &raquo; <a class="el" href="../../d3/da1/group___interface___i_o___device.html">IO控制的设备</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+IO_Device操作函数 的协作图:</div>
+<div class="dyncontent">
+<center><table><tr><td><img src="../../df/d10/group___i_o___device___operate___functions.png" border="0" alt="" usemap="#df_2d10_2group______i__o______device______operate______functions"/>
+<map name="df_2d10_2group______i__o______device______operate______functions" id="df_2d10_2group______i__o______device______operate______functions">
+<area shape="rect" id="node1" href="../../d3/da1/group___interface___i_o___device.html" title="IO控制的设备" alt="" coords="5,5,119,33"/>
+</map>
+</td></tr></table></center>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:gaae723964ec27d9958d620429f9d36bff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d10/group___i_o___device___operate___functions.html#gaae723964ec27d9958d620429f9d36bff">IO_OutDevCtrl</a> (<a class="el" href="../../df/dde/struct_i_o___out_dev.html">IO_OutDev</a> *pDevice, GPIO_PinState NewState)</td></tr>
+<tr class="memdesc:gaae723964ec27d9958d620429f9d36bff"><td class="mdescLeft">&#160;</td><td class="mdescRight">输出设备动作修改  <a href="#gaae723964ec27d9958d620429f9d36bff">更多...</a><br /></td></tr>
+<tr class="separator:gaae723964ec27d9958d620429f9d36bff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga17c80141af0824b38560cf314dd422fc"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d10/group___i_o___device___operate___functions.html#ga17c80141af0824b38560cf314dd422fc">IO_InDevRead</a> (<a class="el" href="../../d6/dbc/struct_i_o___in_dev.html">IO_InDev</a> *pDevice)</td></tr>
+<tr class="memdesc:ga17c80141af0824b38560cf314dd422fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取输入设备引脚瞬时电平状态(未滤波)  <a href="#ga17c80141af0824b38560cf314dd422fc">更多...</a><br /></td></tr>
+<tr class="separator:ga17c80141af0824b38560cf314dd422fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<h2 class="groupheader">函数说明</h2>
+<a id="ga17c80141af0824b38560cf314dd422fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga17c80141af0824b38560cf314dd422fc">&#9670;&nbsp;</a></span>IO_InDevRead()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t IO_InDevRead </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d6/dbc/struct_i_o___in_dev.html">IO_InDev</a> *&#160;</td>
+          <td class="paramname"><em>pDevice</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>获取输入设备引脚瞬时电平状态(未滤波) </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">pDevice</td><td>指向输出设备的指针 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">该电平在此时刻的电平值</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="../../da/d68/io__device_8c_source.html">io_device.c</a> 第 <a class="el" href="../../da/d68/io__device_8c_source.html#l00084">84</a> 行定义.</p>
+<div class="fragment"><div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;{</div><div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">return</span> *(pDevice-&gt;<a class="code" href="../../d6/dbc/struct_i_o___in_dev.html#a24e6339c62109223b1d04a2eb64881f2">pReadPin</a>-&gt;<a class="code" href="../../d1/d96/struct_i_o___in.html#a46436993bcc12661509c484a97991afa">Operator</a>);</div><div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}</div><div class="ttc" id="struct_i_o___in_html_a46436993bcc12661509c484a97991afa"><div class="ttname"><a href="../../d1/d96/struct_i_o___in.html#a46436993bcc12661509c484a97991afa">IO_In::Operator</a></div><div class="ttdeci">BIT_STRIP Operator</div><div class="ttdoc">读位带地址（可读不可写） </div><div class="ttdef"><b>Definition:</b> <a href="../../d2/de2/bsp__gpio_8h_source.html#l00094">bsp_gpio.h:94</a></div></div>
+<div class="ttc" id="struct_i_o___in_dev_html_a24e6339c62109223b1d04a2eb64881f2"><div class="ttname"><a href="../../d6/dbc/struct_i_o___in_dev.html#a24e6339c62109223b1d04a2eb64881f2">IO_InDev::pReadPin</a></div><div class="ttdeci">IO_In * pReadPin</div><div class="ttdoc">指向输入IO实体的指针 </div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d98/io__device_8h_source.html#l00063">io_device.h:63</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="gaae723964ec27d9958d620429f9d36bff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaae723964ec27d9958d620429f9d36bff">&#9670;&nbsp;</a></span>IO_OutDevCtrl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IO_OutDevCtrl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../df/dde/struct_i_o___out_dev.html">IO_OutDev</a> *&#160;</td>
+          <td class="paramname"><em>pDevice</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GPIO_PinState&#160;</td>
+          <td class="paramname"><em>NewState</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>输出设备动作修改 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">pDevice</td><td>指向输出设备的指针 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">NewState</td><td>期望输出的状态 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="../../da/d68/io__device_8c_source.html">io_device.c</a> 第 <a class="el" href="../../da/d68/io__device_8c_source.html#l00074">74</a> 行定义.</p>
+<div class="fragment"><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;{</div><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    *(pDevice-&gt;<a class="code" href="../../df/dde/struct_i_o___out_dev.html#ae7b19d04da679b941a6032b4198b59dc">pCtrlPin</a>-&gt;<a class="code" href="../../d0/ddc/struct_i_o___out.html#ac9e37d890bc7fa402fa13d92216b3336">Operator</a>) = NewState;</div><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;}</div><div class="ttc" id="struct_i_o___out_html_ac9e37d890bc7fa402fa13d92216b3336"><div class="ttname"><a href="../../d0/ddc/struct_i_o___out.html#ac9e37d890bc7fa402fa13d92216b3336">IO_Out::Operator</a></div><div class="ttdeci">BIT_STRIP Operator</div><div class="ttdoc">写位带地址（可读可写） </div><div class="ttdef"><b>Definition:</b> <a href="../../d2/de2/bsp__gpio_8h_source.html#l00075">bsp_gpio.h:75</a></div></div>
+<div class="ttc" id="struct_i_o___out_dev_html_ae7b19d04da679b941a6032b4198b59dc"><div class="ttname"><a href="../../df/dde/struct_i_o___out_dev.html#ae7b19d04da679b941a6032b4198b59dc">IO_OutDev::pCtrlPin</a></div><div class="ttdeci">IO_Out * pCtrlPin</div><div class="ttdoc">指向输出IO实体的指针 </div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d98/io__device_8h_source.html#l00052">io_device.h:52</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者 &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+</body>
+</html>

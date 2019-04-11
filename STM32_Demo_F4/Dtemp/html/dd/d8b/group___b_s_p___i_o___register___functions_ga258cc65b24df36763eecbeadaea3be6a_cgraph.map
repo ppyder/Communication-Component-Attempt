@@ -1,0 +1,6 @@
+<map id="Register_InputIO" name="Register_InputIO">
+<area shape="rect" id="node2" href="$df/d29/group___b_s_p___i_o___init___functions.html#ga998529e04f190cad905e418517926ee9" title="配置GPIO为普通输入功能 " alt="" coords="188,5,317,33"/>
+<area shape="rect" id="node4" href="$d3/d52/bsp__gpio_8c.html#a2e21451076e0ae9f481ca4fab00031bd" title="将引脚位表达转换为引脚数字编号 " alt="" coords="196,57,309,85"/>
+<area shape="rect" id="node3" href="$d3/d52/bsp__gpio_8c.html#a1f6ac205635a99f25bdf3a1c3e44de5b" title="开启IO对应的外设时钟 " alt="" coords="372,5,521,33"/>
+<area shape="rect" id="node5" href="$d3/d52/bsp__gpio_8c.html#a1e830f2ad5c19e4d3796e0f7af874070" title="确定一个八位二进制数中最高非零位的位置（最低位标号为0，从右到左依次递增，最高位为7） ..." alt="" coords="365,57,528,85"/>
+</map>

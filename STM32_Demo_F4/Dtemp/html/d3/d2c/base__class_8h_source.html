@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>HERO Library: ClassDemo/HEROLib/Universal/base_class.h 源文件</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../RobotLogo_png.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">HERO Library
+   &#160;<span id="projectnumber">2018/10/20</span>
+   </div>
+   <div id="projectbrief">This is HERO&#39;s code library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',false,false,'search.php','搜索');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../dir_93186d90ebfe289ad90f37709e4310f8.html">ClassDemo</a></li><li class="navelem"><a class="el" href="../../dir_cdb2e69fb8a7e30e2bdb46500bddd068.html">HEROLib</a></li><li class="navelem"><a class="el" href="../../dir_d9a28773abcad7cfa34f56531e136c3c.html">Universal</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">base_class.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="../../d3/d2c/base__class_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; <span class="comment">/* Define to prevent recursive inclusion -------------------------------------*/</span></div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#ifndef BASE_CLASS_H</span></div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#define BASE_CLASS_H</span></div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">/* Includes ------------------------------------------------------------------*/</span></div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../de/d3c/macros_8h.html">macros.h</a>&quot;</span></div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">/* Exported types ------------------------------------------------------------*/</span></div><div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="../../d1/d62/struct_basic_msg.html">   50</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct</span></div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;{</div><div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="../../d1/d62/struct_basic_msg.html#a3cea08f12d1118ef1d5a4cc7a354900d">   52</a></span>&#160;    uint32_t <a class="code" href="../../d1/d62/struct_basic_msg.html#a3cea08f12d1118ef1d5a4cc7a354900d">ID</a>;    </div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    </div><div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="../../d1/d62/struct_basic_msg.html#a9af4ebd334d7444e7eef8e9fa4190004">   54</a></span>&#160;    <span class="keywordtype">char</span>*   <a class="code" href="../../d1/d62/struct_basic_msg.html#a9af4ebd334d7444e7eef8e9fa4190004">Name</a>;   </div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    </div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}<a class="code" href="../../d1/d62/struct_basic_msg.html">BasicMsg</a>;</div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">/* Exported functions --------------------------------------------------------*/</span></div><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="../../d8/d5f/group___base___class___functions.html#ga41d56dc7c5406939957e15329dd800d7">VariableInit</a>(<span class="keywordtype">void</span> *pVariable, <span class="keyword">const</span> uint32_t MemorySize);</div><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="../../d8/d5f/group___base___class___functions.html#ga33925d49ef4256052f3236aaa384ff91">DataCopy</a>(<span class="keywordtype">void</span> *pAimAddress, <span class="keyword">const</span> <span class="keywordtype">void</span>* <span class="keyword">const</span> pSourceAddress, <span class="keyword">const</span> uint32_t MemorySize);</div><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="../../d8/d5f/group___base___class___functions.html#ga1cc5ee5b4f0981220c77a132e7e90fc8">VariableSet</a>(<span class="keywordtype">void</span> *pVariable, <span class="keyword">const</span> int8_t SetNumber, <span class="keyword">const</span> uint32_t MemorySize);</div><div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* __base_class_H */</span><span class="preprocessor"></span></div><div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div><div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">/************************ (C) COPYRIGHT HITwh Excellent Robot Organization(HERO). *****END OF FILE****/</span></div><div class="ttc" id="struct_basic_msg_html"><div class="ttname"><a href="../../d1/d62/struct_basic_msg.html">BasicMsg</a></div><div class="ttdoc">基本信息 结构体定义 </div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d2c/base__class_8h_source.html#l00050">base_class.h:50</a></div></div>
+<div class="ttc" id="struct_basic_msg_html_a3cea08f12d1118ef1d5a4cc7a354900d"><div class="ttname"><a href="../../d1/d62/struct_basic_msg.html#a3cea08f12d1118ef1d5a4cc7a354900d">BasicMsg::ID</a></div><div class="ttdeci">uint32_t ID</div><div class="ttdoc">编号信息（句柄） </div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d2c/base__class_8h_source.html#l00052">base_class.h:52</a></div></div>
+<div class="ttc" id="macros_8h_html"><div class="ttname"><a href="../../de/d3c/macros_8h.html">macros.h</a></div><div class="ttdoc">包含一些通用的宏和枚举类型. </div></div>
+<div class="ttc" id="struct_basic_msg_html_a9af4ebd334d7444e7eef8e9fa4190004"><div class="ttname"><a href="../../d1/d62/struct_basic_msg.html#a9af4ebd334d7444e7eef8e9fa4190004">BasicMsg::Name</a></div><div class="ttdeci">char * Name</div><div class="ttdoc">文字性描述 </div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d2c/base__class_8h_source.html#l00054">base_class.h:54</a></div></div>
+<div class="ttc" id="group___base___class___functions_html_ga33925d49ef4256052f3236aaa384ff91"><div class="ttname"><a href="../../d8/d5f/group___base___class___functions.html#ga33925d49ef4256052f3236aaa384ff91">DataCopy</a></div><div class="ttdeci">bool DataCopy(void *pAimAddress, const void *const pSourceAddress, const uint32_t MemorySize)</div><div class="ttdoc">数据拷贝函数，可用于结构体的简单复制操作和数据复制 </div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d14/base__class_8c_source.html#l00031">base_class.c:31</a></div></div>
+<div class="ttc" id="group___base___class___functions_html_ga1cc5ee5b4f0981220c77a132e7e90fc8"><div class="ttname"><a href="../../d8/d5f/group___base___class___functions.html#ga1cc5ee5b4f0981220c77a132e7e90fc8">VariableSet</a></div><div class="ttdeci">bool VariableSet(void *pVariable, const int8_t SetNumber, const uint32_t MemorySize)</div><div class="ttdoc">设置变量的前MemorySize个字节的值 </div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d14/base__class_8c_source.html#l00053">base_class.c:53</a></div></div>
+<div class="ttc" id="group___base___class___functions_html_ga41d56dc7c5406939957e15329dd800d7"><div class="ttname"><a href="../../d8/d5f/group___base___class___functions.html#ga41d56dc7c5406939957e15329dd800d7">VariableInit</a></div><div class="ttdeci">bool VariableInit(void *pVariable, const uint32_t MemorySize)</div><div class="ttdoc">初始化变量，将其内容置零 </div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d14/base__class_8c_source.html#l00074">base_class.c:74</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者 &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+</body>
+</html>

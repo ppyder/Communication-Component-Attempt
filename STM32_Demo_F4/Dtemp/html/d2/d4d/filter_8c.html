@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>HERO Library: ClassDemo/HEROLib/Universal/filter.c 文件参考</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../RobotLogo_png.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">HERO Library
+   &#160;<span id="projectnumber">2018/10/20</span>
+   </div>
+   <div id="projectbrief">This is HERO&#39;s code library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',false,false,'search.php','搜索');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../dir_93186d90ebfe289ad90f37709e4310f8.html">ClassDemo</a></li><li class="navelem"><a class="el" href="../../dir_cdb2e69fb8a7e30e2bdb46500bddd068.html">HEROLib</a></li><li class="navelem"><a class="el" href="../../dir_d9a28773abcad7cfa34f56531e136c3c.html">Universal</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">函数</a> &#124;
+<a href="#var-members">变量</a>  </div>
+  <div class="headertitle">
+<div class="title">filter.c 文件参考</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>软件底层：滤波器相关的基本操作和方法.  
+<a href="#details">更多...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="../../dd/de7/filter_8h_source.html">filter.h</a>&quot;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+filter.c 的引用(Include)关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d3/d3f/filter_8c__incl.png" border="0" usemap="#_class_demo_2_h_e_r_o_lib_2_universal_2filter_8c" alt=""/></div>
+<map name="_class_demo_2_h_e_r_o_lib_2_universal_2filter_8c" id="_class_demo_2_h_e_r_o_lib_2_universal_2filter_8c">
+<area shape="rect" id="node2" href="../../dd/de7/filter_8h.html" title="包含关于滤波器的类型定义和函数声明. " alt="" coords="59,97,121,125"/>
+<area shape="rect" id="node3" href="../../de/d3c/macros_8h.html" title="包含一些通用的宏和枚举类型. " alt="" coords="49,173,131,201"/>
+</map>
+</div>
+</div>
+<p><a href="../../d2/d4d/filter_8c_source.html">浏览源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:gae7419fd4caa4b18a5aa322248a79b4ca"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d0a/group___filter___functions.html#gae7419fd4caa4b18a5aa322248a79b4ca">InputFilter</a> (<a class="el" href="../../d0/d64/struct_state_filter.html">StateFilter</a> *pFilter, bool NowState)</td></tr>
+<tr class="memdesc:gae7419fd4caa4b18a5aa322248a79b4ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">输入滤波函数  <a href="../../d9/d0a/group___filter___functions.html#gae7419fd4caa4b18a5aa322248a79b4ca">更多...</a><br /></td></tr>
+<tr class="separator:gae7419fd4caa4b18a5aa322248a79b4ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0fee5ab29d1793c040d19fa5565b38cd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/dc9/group___filter___exported___types.html#ga965316eaee8e165bd2afbe0dee6f7b16">JumpingState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d0a/group___filter___functions.html#ga0fee5ab29d1793c040d19fa5565b38cd">GetJumpingState</a> (<a class="el" href="../../d0/d64/struct_state_filter.html">StateFilter</a> *pFilter)</td></tr>
+<tr class="memdesc:ga0fee5ab29d1793c040d19fa5565b38cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取跳变状态  <a href="../../d9/d0a/group___filter___functions.html#ga0fee5ab29d1793c040d19fa5565b38cd">更多...</a><br /></td></tr>
+<tr class="separator:ga0fee5ab29d1793c040d19fa5565b38cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+变量</h2></td></tr>
+<tr class="memitem:a19ff740542d308e9e679812f72982dca"><td class="memItemLeft" align="right" valign="top">static const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d4d/filter_8c.html#a19ff740542d308e9e679812f72982dca">FILTER_MASK_CODE</a> [33]</td></tr>
+<tr class="memdesc:a19ff740542d308e9e679812f72982dca"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量数表 滤波掩码 用于决定滤波位数  <a href="#a19ff740542d308e9e679812f72982dca">更多...</a><br /></td></tr>
+<tr class="separator:a19ff740542d308e9e679812f72982dca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>软件底层：滤波器相关的基本操作和方法. </p>
+<ul>
+<li>提供了状态滤波器相关的方法 ++ 滤波跳变状态的获取函数 ++ 按位滤波的函数</li>
+<li>TODO:提供数据滤波器相关的方法 <dl class="section version"><dt>版本</dt><dd>1.0 示例版本 </dd></dl>
+<dl class="section author"><dt>作者</dt><dd>杨亦凡  17863107058(手机) 942041771(qq) </dd></dl>
+<dl class="section date"><dt>日期</dt><dd>2018/10/18</dd></dl>
+<pre class="fragment"> ==============================================================================
+                     ##### TIMER Generic features #####
+ ==============================================================================
+ [..] The Timer features include:
+      (#) 16-bit up, down, up/down auto-reload counter.
+      (#) 16-bit programmable prescaler allowing dividing (also on the fly) the 
+          counter clock frequency either by any factor between 1 and 65536.
+      (#) Up to 4 independent channels for:
+          (++) Input Capture
+          (++) Output Compare
+          (++) PWM generation (Edge and Center-aligned Mode)
+          (++) One-pulse mode output 
+
+           ##### How to use this driver #####
+ ==============================================================================
+   [..]
+    (#) Initialize the TIM low level resources by implementing the following functions 
+        depending from feature used :
+          (++) Time Base : HAL_TIM_Base_MspInit()
+          (++) Input Capture : HAL_TIM_IC_MspInit()
+          (++) Output Compare : HAL_TIM_OC_MspInit()
+          (++) PWM generation : HAL_TIM_PWM_MspInit()
+          (++) One-pulse mode output : HAL_TIM_OnePulse_MspInit()
+          (++) Encoder mode output : HAL_TIM_Encoder_MspInit()
+
+    (#) Initialize the TIM low level resources :
+       (##) Enable the TIM interface clock using __HAL_RCC_TIMx_CLK_ENABLE();
+       (##) TIM pins configuration
+           (+++) Enable the clock for the TIM GPIOs using the following function:
+            __HAL_RCC_GPIOx_CLK_ENABLE();
+           (+++) Configure these TIM pins in Alternate function mode using HAL_GPIO_Init();
+
+    (#) The external Clock can be configured, if needed (the default clock is the 
+        internal clock from the APBx), using the following function:
+        HAL_TIM_ConfigClockSource, the clock configuration should be done before 
+        any start function.
+
+    (#) Configure the TIM in the desired functioning mode using one of the 
+      Initialization function of this driver:
+      (++) HAL_TIM_Base_Init: to use the Timer to generate a simple time base
+      (++) HAL_TIM_OC_Init and HAL_TIM_OC_ConfigChannel: to use the Timer to generate an 
+           Output Compare signal.
+      (++) HAL_TIM_PWM_Init and HAL_TIM_PWM_ConfigChannel: to use the Timer to generate a 
+           PWM signal.
+      (++) HAL_TIM_IC_Init and HAL_TIM_IC_ConfigChannel: to use the Timer to measure an 
+           external signal.
+        (++) HAL_TIM_OnePulse_Init and HAL_TIM_OnePulse_ConfigChannel: to use the Timer 
+             in One Pulse Mode.
+      (++) HAL_TIM_Encoder_Init: to use the Timer Encoder Interface.
+
+    (#) Activate the TIM peripheral using one of the start functions depending from the feature used:
+          (++) Time Base : HAL_TIM_Base_Start(), HAL_TIM_Base_Start_DMA(), HAL_TIM_Base_Start_IT()
+          (++) Input Capture :  HAL_TIM_IC_Start(), HAL_TIM_IC_Start_DMA(), HAL_TIM_IC_Start_IT()
+          (++) Output Compare : HAL_TIM_OC_Start(), HAL_TIM_OC_Start_DMA(), HAL_TIM_OC_Start_IT()
+          (++) PWM generation : HAL_TIM_PWM_Start(), HAL_TIM_PWM_Start_DMA(), HAL_TIM_PWM_Start_IT()
+          (++) One-pulse mode output : HAL_TIM_OnePulse_Start(), HAL_TIM_OnePulse_Start_IT()
+          (++) Encoder mode output : HAL_TIM_Encoder_Start(), HAL_TIM_Encoder_Start_DMA(), HAL_TIM_Encoder_Start_IT().
+
+    (#) The DMA Burst is managed with the two following functions:
+        HAL_TIM_DMABurst_WriteStart()
+        HAL_TIM_DMABurst_ReadStart()</pre></li>
+</ul>
+<dl class="section attention"><dt>注意</dt><dd></dd></dl>
+<h2><center>&copy; Copyright (C) HITwh Excellent Robot Organization(HERO). 2015-2018.</center></h2>
+
+<p class="definition">在文件 <a class="el" href="../../d2/d4d/filter_8c_source.html">filter.c</a> 中定义.</p>
+</div><h2 class="groupheader">变量说明</h2>
+<a id="a19ff740542d308e9e679812f72982dca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19ff740542d308e9e679812f72982dca">&#9670;&nbsp;</a></span>FILTER_MASK_CODE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint32_t FILTER_MASK_CODE[33]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>初始值:</b><div class="fragment"><div class="line">= </div><div class="line">{</div><div class="line">    0X00,</div><div class="line">    0x01,       0x03,       0x07,       0x0F,</div><div class="line">    0x1F,       0x3F,       0x7F,       0xFF,</div><div class="line">    0x1FF,      0x3FF,      0x7FF,      0xFFF,</div><div class="line">    0x1FFF,     0x3FFF,     0x7FFF,     0xFFFF,</div><div class="line">    0x1FFFF,    0x3FFFF,    0x7FFFF,    0xFFFFF,</div><div class="line">    0x1FFFFF,   0x3FFFFF,   0x7FFFFF,   0xFFFFFF,</div><div class="line">    0x1FFFFFF,  0x3FFFFFF,  0x7FFFFFF,  0xFFFFFFF,</div><div class="line">    0x1FFFFFFF, 0x3FFFFFFF, 0x7FFFFFFF, 0xFFFFFFFF</div><div class="line">}</div></div><!-- fragment -->
+<p>常量数表 滤波掩码 用于决定滤波位数 </p>
+
+<p class="definition">在文件 <a class="el" href="../../d2/d4d/filter_8c_source.html">filter.c</a> 第 <a class="el" href="../../d2/d4d/filter_8c_source.html#l00095">95</a> 行定义.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者 &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+</body>
+</html>

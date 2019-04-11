@@ -215,8 +215,17 @@ namespace TempUpper
         //枚举定义：PID的ID列表
         enum PID_IDList
         {
-            PID_SingleMotor = 0x00,    //单电机PID
+            PID_SingleMotor = 0x00,     //单电机转速PID
+            PID_SingleMotorAngle,       //单电机位置PID
+            PID_RobAccelerated,         //整车加速度PID
+            PID_RobLocation,            //整车位置PID
+            PID_RobEnd,                 //整车终点PID
+            PID_RobTime,                //整车时间PID
 
+            PID_PickAngle,          //抓取角度PID
+            PID_PickSpeed,          //抓取速度PID
+            PID_LaunchAngle,        //发射角度PID
+            PID_LaunchSpeed,        //发射速度PID
         };
 
         //PID设置指令
@@ -258,6 +267,7 @@ namespace TempUpper
         };
 
         #endregion
+
         #endregion
 
         #region 公示的状态参量

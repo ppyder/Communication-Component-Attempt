@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>HERO Library: BSP_IO硬件初始化函数</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../RobotLogo_png.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">HERO Library
+   &#160;<span id="projectnumber">2018/10/20</span>
+   </div>
+   <div id="projectbrief">This is HERO&#39;s code library.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.14 -->
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('../../',false,false,'search.php','搜索');
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">函数</a>  </div>
+  <div class="headertitle">
+<div class="title">BSP_IO硬件初始化函数<div class="ingroups"><a class="el" href="../../d0/d25/group___hero_library.html">HERO团队代码库</a> &raquo; <a class="el" href="../../d9/d70/group___low___level___library.html">Low Level Library(底层库)</a> &raquo; <a class="el" href="../../d0/dcf/group___b_s_p___driver___library.html">BSP Driver(板级驱动)</a> &raquo; <a class="el" href="../../dc/d2f/group___b_s_p___i_o___device.html">IO板级驱动</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+BSP_IO硬件初始化函数 的协作图:</div>
+<div class="dyncontent">
+<center><table><tr><td><img src="../../df/d29/group___b_s_p___i_o___init___functions.png" border="0" alt="" usemap="#df_2d29_2group______b__s__p______i__o______init______functions"/>
+<map name="df_2d29_2group______b__s__p______i__o______init______functions" id="df_2d29_2group______b__s__p______i__o______init______functions">
+<area shape="rect" id="node2" href="../../dc/d2f/group___b_s_p___i_o___device.html" title="IO板级驱动" alt="" coords="5,5,104,33"/>
+</map>
+</td></tr></table></center>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga998529e04f190cad905e418517926ee9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d29/group___b_s_p___i_o___init___functions.html#ga998529e04f190cad905e418517926ee9">Input_GPIO_Init</a> (GPIO_TypeDef *GPIOx, uint32_t GPIO_Pin, uint32_t InputMode, uint32_t Pull)</td></tr>
+<tr class="memdesc:ga998529e04f190cad905e418517926ee9"><td class="mdescLeft">&#160;</td><td class="mdescRight">配置GPIO为普通输入功能  <a href="#ga998529e04f190cad905e418517926ee9">更多...</a><br /></td></tr>
+<tr class="separator:ga998529e04f190cad905e418517926ee9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3434494d01229b8d78b4376db72c61e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d29/group___b_s_p___i_o___init___functions.html#ga3434494d01229b8d78b4376db72c61e1">Output_GPIO_Init</a> (GPIO_TypeDef *GPIOx, uint32_t GPIO_Pin, uint32_t OutputMode, uint32_t Speed, GPIO_PinState Initstate)</td></tr>
+<tr class="memdesc:ga3434494d01229b8d78b4376db72c61e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">配置GPIO为普通输出功能  <a href="#ga3434494d01229b8d78b4376db72c61e1">更多...</a><br /></td></tr>
+<tr class="separator:ga3434494d01229b8d78b4376db72c61e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<h2 class="groupheader">函数说明</h2>
+<a id="ga998529e04f190cad905e418517926ee9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga998529e04f190cad905e418517926ee9">&#9670;&nbsp;</a></span>Input_GPIO_Init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Input_GPIO_Init </td>
+          <td>(</td>
+          <td class="paramtype">GPIO_TypeDef *&#160;</td>
+          <td class="paramname"><em>GPIOx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>GPIO_Pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>InputMode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>Pull</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>配置GPIO为普通输入功能 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">GPIOx</td><td>指定GPIO端口 (GPIOx, x可以是A -&gt; F) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">GPIO_Pin</td><td>指定GPIO引脚号(位表达) GPIO_pins_define </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">InputMode</td><td>指定输入模式 GPIO_mode_define </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Pull</td><td>指定上下拉 GPIO_pull_define </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="../../d3/d52/bsp__gpio_8c_source.html">bsp_gpio.c</a> 第 <a class="el" href="../../d3/d52/bsp__gpio_8c_source.html#l00141">141</a> 行定义.</p>
+<div class="fragment"><div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;{</div><div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    GPIO_InitTypeDef GPIO_InitStruct;</div><div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    </div><div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    <span class="comment">//开启对应IO的时钟</span></div><div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <a class="code" href="../../d3/d52/bsp__gpio_8c.html#a1f6ac205635a99f25bdf3a1c3e44de5b">ENABLE_GPIO_CLK</a>(GPIOx);</div><div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    </div><div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="comment">//指定引脚号</span></div><div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    GPIO_InitStruct.Pin = GPIO_Pin;</div><div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    </div><div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="comment">//指定模式</span></div><div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    GPIO_InitStruct.Mode = InputMode;</div><div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    </div><div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="comment">//指定上下拉</span></div><div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    GPIO_InitStruct.Pull = Pull;</div><div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    </div><div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <span class="comment">//按照指定参数初始化对应IO</span></div><div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    HAL_GPIO_Init(GPIOx, &amp;GPIO_InitStruct);</div><div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;}</div><div class="ttc" id="bsp__gpio_8c_html_a1f6ac205635a99f25bdf3a1c3e44de5b"><div class="ttname"><a href="../../d3/d52/bsp__gpio_8c.html#a1f6ac205635a99f25bdf3a1c3e44de5b">ENABLE_GPIO_CLK</a></div><div class="ttdeci">static void ENABLE_GPIO_CLK(GPIO_TypeDef *GPIOx)</div><div class="ttdoc">开启IO对应的外设时钟 </div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d52/bsp__gpio_8c_source.html#l00090">bsp_gpio.c:90</a></div></div>
+</div><!-- fragment --><div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../df/d29/group___b_s_p___i_o___init___functions_ga998529e04f190cad905e418517926ee9_cgraph.png" border="0" usemap="#df/d29/group___b_s_p___i_o___init___functions_ga998529e04f190cad905e418517926ee9_cgraph" alt=""/></div>
+<map name="df/d29/group___b_s_p___i_o___init___functions_ga998529e04f190cad905e418517926ee9_cgraph" id="df/d29/group___b_s_p___i_o___init___functions_ga998529e04f190cad905e418517926ee9_cgraph">
+<area shape="rect" id="node2" href="../../d3/d52/bsp__gpio_8c.html#a1f6ac205635a99f25bdf3a1c3e44de5b" title="开启IO对应的外设时钟 " alt="" coords="183,5,332,33"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../df/d29/group___b_s_p___i_o___init___functions_ga998529e04f190cad905e418517926ee9_icgraph.png" border="0" usemap="#df/d29/group___b_s_p___i_o___init___functions_ga998529e04f190cad905e418517926ee9_icgraph" alt=""/></div>
+<map name="df/d29/group___b_s_p___i_o___init___functions_ga998529e04f190cad905e418517926ee9_icgraph" id="df/d29/group___b_s_p___i_o___init___functions_ga998529e04f190cad905e418517926ee9_icgraph">
+<area shape="rect" id="node2" href="../../dd/d8b/group___b_s_p___i_o___register___functions.html#ga258cc65b24df36763eecbeadaea3be6a" title="注册一个作为普通输入功能的IO " alt="" coords="183,5,317,33"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ga3434494d01229b8d78b4376db72c61e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3434494d01229b8d78b4376db72c61e1">&#9670;&nbsp;</a></span>Output_GPIO_Init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Output_GPIO_Init </td>
+          <td>(</td>
+          <td class="paramtype">GPIO_TypeDef *&#160;</td>
+          <td class="paramname"><em>GPIOx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>GPIO_Pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>OutputMode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>Speed</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GPIO_PinState&#160;</td>
+          <td class="paramname"><em>Initstate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>配置GPIO为普通输出功能 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">GPIOx</td><td>指定GPIO端口 (GPIOx, x可以是A -&gt; F) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">GPIO_Pin</td><td>指定GPIO引脚号(位表达) GPIO_pins_define </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">OutputMode</td><td>指定输出模式 GPIO_mode_define </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Speed</td><td>指定输出速率 GPIO_speed_define </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Initstate</td><td>指定初始输出电平 GPIO_PinState </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">None</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="../../d3/d52/bsp__gpio_8c_source.html">bsp_gpio.c</a> 第 <a class="el" href="../../d3/d52/bsp__gpio_8c_source.html#l00170">170</a> 行定义.</p>
+<div class="fragment"><div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;{</div><div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    GPIO_InitTypeDef GPIO_InitStruct;</div><div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    </div><div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    <span class="comment">//开启对应IO的时钟</span></div><div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    <a class="code" href="../../d3/d52/bsp__gpio_8c.html#a1f6ac205635a99f25bdf3a1c3e44de5b">ENABLE_GPIO_CLK</a>(GPIOx);</div><div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    </div><div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    <span class="comment">//指定引脚号</span></div><div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    GPIO_InitStruct.Pin = GPIO_Pin;</div><div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    </div><div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="comment">//指定输出模式</span></div><div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    GPIO_InitStruct.Mode = OutputMode;</div><div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    </div><div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <span class="comment">//指定输出速率</span></div><div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    GPIO_InitStruct.Speed = Speed;</div><div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;</div><div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="comment">//按照指定参数初始化对应IO</span></div><div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    HAL_GPIO_Init(GPIOx, &amp;GPIO_InitStruct);</div><div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    </div><div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="comment">//指定IO初始状态</span></div><div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    HAL_GPIO_WritePin(GPIOx, GPIO_Pin, Initstate);</div><div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;}</div><div class="ttc" id="bsp__gpio_8c_html_a1f6ac205635a99f25bdf3a1c3e44de5b"><div class="ttname"><a href="../../d3/d52/bsp__gpio_8c.html#a1f6ac205635a99f25bdf3a1c3e44de5b">ENABLE_GPIO_CLK</a></div><div class="ttdeci">static void ENABLE_GPIO_CLK(GPIO_TypeDef *GPIOx)</div><div class="ttdoc">开启IO对应的外设时钟 </div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d52/bsp__gpio_8c_source.html#l00090">bsp_gpio.c:90</a></div></div>
+</div><!-- fragment --><div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../df/d29/group___b_s_p___i_o___init___functions_ga3434494d01229b8d78b4376db72c61e1_cgraph.png" border="0" usemap="#df/d29/group___b_s_p___i_o___init___functions_ga3434494d01229b8d78b4376db72c61e1_cgraph" alt=""/></div>
+<map name="df/d29/group___b_s_p___i_o___init___functions_ga3434494d01229b8d78b4376db72c61e1_cgraph" id="df/d29/group___b_s_p___i_o___init___functions_ga3434494d01229b8d78b4376db72c61e1_cgraph">
+<area shape="rect" id="node2" href="../../d3/d52/bsp__gpio_8c.html#a1f6ac205635a99f25bdf3a1c3e44de5b" title="开启IO对应的外设时钟 " alt="" coords="192,5,341,33"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../df/d29/group___b_s_p___i_o___init___functions_ga3434494d01229b8d78b4376db72c61e1_icgraph.png" border="0" usemap="#df/d29/group___b_s_p___i_o___init___functions_ga3434494d01229b8d78b4376db72c61e1_icgraph" alt=""/></div>
+<map name="df/d29/group___b_s_p___i_o___init___functions_ga3434494d01229b8d78b4376db72c61e1_icgraph" id="df/d29/group___b_s_p___i_o___init___functions_ga3434494d01229b8d78b4376db72c61e1_icgraph">
+<area shape="rect" id="node2" href="../../dd/d8b/group___b_s_p___i_o___register___functions.html#gaaafd2d6627f9093a9f441006eb0afd3e" title="注册一个作为普通输出功能的IO " alt="" coords="192,5,336,33"/>
+</map>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者 &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+</body>
+</html>
