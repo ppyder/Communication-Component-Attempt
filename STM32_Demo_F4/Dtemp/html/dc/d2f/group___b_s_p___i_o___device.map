@@ -1,8 +1,0 @@
-<map id="IO板级驱动" name="IO板级驱动">
-<area shape="rect" id="node1" href="$df/d29/group___b_s_p___i_o___init___functions.html" title="BSP_IO硬件初始化函数" alt="" coords="361,5,539,33"/>
-<area shape="rect" id="node2" href="$d0/dcf/group___b_s_p___driver___library.html" title="BSP Driver(板级驱动)" alt="" coords="5,109,167,137"/>
-<area shape="rect" id="node3" href="$df/d17/group___b_s_p___i_o___exported___types.html" title="BSP_IO数据类型" alt="" coords="384,57,516,85"/>
-<area shape="rect" id="node5" href="$d2/d6e/group___b_s_p___i_o___exported___macros.html" title="BSP_IO宏" alt="" coords="407,109,493,137"/>
-<area shape="rect" id="node6" href="$d4/da8/group___b_s_p___i_o___bit_strip___macros.html" title="BSP_IO位带宏" alt="" coords="391,161,509,189"/>
-<area shape="rect" id="node7" href="$dd/d8b/group___b_s_p___i_o___register___functions.html" title="BSP_IO注册函数" alt="" coords="384,213,516,241"/>
-</map>

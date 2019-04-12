@@ -1,7 +1,0 @@
-<map id="IO控制的设备" name="IO控制的设备">
-<area shape="rect" id="node1" href="$d0/d3f/group___i_o___device___register___functions.html" title="IO_Device注册函数" alt="" coords="444,5,593,33"/>
-<area shape="rect" id="node2" href="$d7/db6/group___i_o___device___exported___macros.html" title="IO_Device宏" alt="" coords="466,57,571,85"/>
-<area shape="rect" id="node3" href="$d5/da6/group___interface___to___middle_tier.html" title="Interface(与中间层的抽象接口)" alt="" coords="5,84,235,112"/>
-<area shape="rect" id="node5" href="$df/d10/group___i_o___device___operate___functions.html" title="IO_Device操作函数" alt="" coords="444,109,593,137"/>
-<area shape="rect" id="node6" href="$d7/d92/group___i_o___device___exported___types.html" title="IO_Device数据类型" alt="" coords="444,161,593,189"/>
-</map>

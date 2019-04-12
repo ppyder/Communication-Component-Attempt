@@ -189,6 +189,10 @@ namespace TempUpper
                     Msg = Tx_ActionDebugCMD;
                     break;
 
+                case MsgTypesID.Tx_PIDSetCMD:
+                    Msg = Tx_PIDSetCMD;
+                    break;
+
                 default:
                     Msg = null;
                     break;

@@ -1,5 +1,0 @@
-<map id="CheckHighest1In8Bits" name="CheckHighest1In8Bits">
-<area shape="rect" id="node2" href="$d3/d52/bsp__gpio_8c.html#a2e21451076e0ae9f481ca4fab00031bd" title="将引脚位表达转换为引脚数字编号 " alt="" coords="216,32,329,60"/>
-<area shape="rect" id="node3" href="$dd/d8b/group___b_s_p___i_o___register___functions.html#ga258cc65b24df36763eecbeadaea3be6a" title="注册一个作为普通输入功能的IO " alt="" coords="382,5,517,33"/>
-<area shape="rect" id="node4" href="$dd/d8b/group___b_s_p___i_o___register___functions.html#gaaafd2d6627f9093a9f441006eb0afd3e" title="注册一个作为普通输出功能的IO " alt="" coords="377,57,521,85"/>
-</map>

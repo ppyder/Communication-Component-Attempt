@@ -5,6 +5,11 @@
 SampleCMDTypedef SampleCMD = {0};
 //实际采样时更新的值
 SampleDataTypedef SampelData = {0};
+BaseMotionDataTypedef BaseMotionData = {0};
+BasePlanDataTypedef    BasePlanData = {0};
+MR1CtrlDataTypedef    Mr1CtrlData = {0};
+ActionDebugDataTypedef  ActionebugData = {0};
+PIDDataGetTypedef       PIDDataFeedback = {0};
 
 //接收到的数据反馈值，初始化为空指令
 enum MstrRxMsgTypes RxMsgTypeFeedBack = MstrRx_EmptyCMD;
@@ -15,25 +20,48 @@ enum Mstr_TxMsgTypes TxMsgTypeSaved = MstrTx_EmptyData;
 bool GetMsgFromMstrBuffer(Mstr_RxBufTypedef *pBuffer)
 {
     bool IsValidID = true;
-    switch(pBuffer->Head.MsgTypeID)
+     switch(pBuffer->Head.MsgTypeID)
     {
+        case MstrRx_ErrorCMD: 
+            break;
+        
+        case MstrRx_EmptyCMD: 
+            break;
+        
         case MstrRx_SampleCMD: 
             SampleCMD = pBuffer->Data.Sample;
-            //如果要开始记录了
+            //开始采样
             if(1 == SampleCMD.CMD)
             {
                 StartSample();
             }
-            //如果停止记录了
+            //结束采样
             else if(0 == SampleCMD.CMD)
             {
                 StopSample();
             }
             break;
+            
+        case MstrRx_BaseMotionCMD: 
+            break;
+        
+        case MstrRx_PlanMotionTestCMD: 
+            break;
+        
+        case MstrRx_AutoProcessCMD: 
+            break;
+        
+        case MstrRx_UpperActionDebugCMD: 
+            break;
+        
+        case MstrRx_PIDSetCMD: 
+            //PIDCMD = pBuffer->Data.PIDData;
+            break;
                 
         default: IsValidID = false;
                 break;
     }
+
     return IsValidID;
 }
 
@@ -42,7 +70,28 @@ bool GetTxData(union MstrTxUnionType *pUnion, uint8_t *pDataType)
 {
     switch(*pDataType)
     {
-        case MstrRx_SampleCMD: pUnion->Sample = SampelData;
+        case MstrTx_ErrorData: 
+                            break;
+        
+        case MstrTx_EmptyData: 
+                            break;
+        
+        case MstrTx_SampleData: pUnion->Sample = SampelData;
+                            break;
+        
+        case MstrTx_BaseMotionData: pUnion->BaseMotionData = BaseMotionData;
+                            break;
+        
+        case MstrTx_PlanMotionTestData: pUnion->PlanTestData = BasePlanData;
+                            break;
+        
+        case MstrTx_AutoProcessData: pUnion->AutoCtrlData = Mr1CtrlData;
+                            break;
+        
+        case MstrTx_UpperActionDebugData: pUnion->ActionDebugData = ActionebugData;
+                            break;
+        
+        case MstrTx_PIDData: pUnion->PIDData = PIDDataFeedback;
                             break;
                 
         default: break;
