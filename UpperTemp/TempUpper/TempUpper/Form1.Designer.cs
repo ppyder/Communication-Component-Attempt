@@ -60,6 +60,8 @@
             this.SendTimer = new System.Windows.Forms.Timer(this.components);
             this.label7 = new System.Windows.Forms.Label();
             this.lb_TestKp = new System.Windows.Forms.Label();
+            this.lb_RequestError = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnSOpen
@@ -388,7 +390,7 @@
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(113, 254);
+            this.label7.Location = new System.Drawing.Point(25, 254);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(53, 12);
             this.label7.TabIndex = 54;
@@ -398,17 +400,39 @@
             // 
             this.lb_TestKp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lb_TestKp.AutoSize = true;
-            this.lb_TestKp.Location = new System.Drawing.Point(172, 254);
+            this.lb_TestKp.Location = new System.Drawing.Point(84, 254);
             this.lb_TestKp.Name = "lb_TestKp";
             this.lb_TestKp.Size = new System.Drawing.Size(53, 12);
             this.lb_TestKp.TabIndex = 55;
             this.lb_TestKp.Text = "0Byte(s)";
+            // 
+            // lb_RequestError
+            // 
+            this.lb_RequestError.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lb_RequestError.AutoSize = true;
+            this.lb_RequestError.Location = new System.Drawing.Point(272, 254);
+            this.lb_RequestError.Name = "lb_RequestError";
+            this.lb_RequestError.Size = new System.Drawing.Size(53, 12);
+            this.lb_RequestError.TabIndex = 57;
+            this.lb_RequestError.Text = "0Byte(s)";
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(165, 254);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(101, 12);
+            this.label9.TabIndex = 56;
+            this.label9.Text = "RequestErrorCnt:";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(359, 275);
+            this.Controls.Add(this.lb_RequestError);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.lb_TestKp);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.btn_test);
@@ -479,6 +503,8 @@
         private System.Windows.Forms.Timer SendTimer;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lb_TestKp;
+        private System.Windows.Forms.Label lb_RequestError;
+        private System.Windows.Forms.Label label9;
     }
 }
 

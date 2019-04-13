@@ -203,6 +203,9 @@ namespace TempUpper
             //标识是否可以在触发发送请求时发送数据，只有在接收到下位机回复的数据时才会被置一
             public bool isCouldSendMessage;
 
+            //请求驳回计数器，当本次发送请求被驳回时自增一,当发送成功时清零，也可被外部清零
+            public UInt64 RequestErrorCnt;
+
             //本机刚刚发出的指令类型
             public UserDatas.MsgTypesID HaveSendID;
 
@@ -215,6 +218,19 @@ namespace TempUpper
 
         //发送状态记录器
         SendIDlog COM_log = new SendIDlog();
+
+        //[发送请求]该属性写入任何值都会清零
+        public UInt64 RequestErrorCounter
+        {
+            get
+            {
+                return COM_log.RequestErrorCnt;
+            }
+            set
+            {
+                COM_log.RequestErrorCnt = 0;
+            }
+        }
 
         //重置发送标志以重新激活发送动作
         public void ReConnectSlave()
@@ -324,11 +340,17 @@ namespace TempUpper
                 Datas.StructToBytes(Datas.Tx_Datatail, ref DataToSend, Datas.DataHeadSize + Datas.TxDataContentSize);
 
                 COM_log.isCouldSendMessage = false;
+
+                //发送请求驳回计数器清零
+                COM_log.RequestErrorCnt = 0;
             }
             else
             {
                 //返回空数组
                 DataToSend = new byte[0];
+
+                //发送请求驳回计数器自增一
+                COM_log.RequestErrorCnt++;
             }
 
             return DataToSend;

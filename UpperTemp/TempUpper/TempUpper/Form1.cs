@@ -431,6 +431,7 @@ namespace TempUpper
         //定时刷新参量
         private void timer_Tick(object sender, EventArgs e)
         {
+            lb_RequestError.Text = Comunication.RequestErrorCounter.ToString();
             lb_PackReceivedNum.Text = Comunication.PackReceived.ToString() + "组";
             lb_ByteReceivedNum.Text = Comunication.ByteReceived.ToString() + "Byte(s)";
             lb_ErrorPackNum.Text = Comunication.ErrorPackReceived.ToString() + "包";

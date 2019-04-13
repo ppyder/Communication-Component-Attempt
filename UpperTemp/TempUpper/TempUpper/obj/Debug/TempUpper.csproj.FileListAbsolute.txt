@@ -7,6 +7,3 @@ C:\Users\Yangyifan\Desktop\UpperTemp\TempUpper\TempUpper\obj\Debug\TempUpper.csp
 C:\Users\Yangyifan\Desktop\UpperTemp\TempUpper\TempUpper\obj\Debug\TempUpper.exe
 C:\Users\Yangyifan\Desktop\UpperTemp\TempUpper\TempUpper\obj\Debug\TempUpper.pdb
 C:\Users\Yangyifan\Desktop\UpperTemp\TempUpper\TempUpper\obj\Debug\TempUpper.MainForm.resources
-C:\Users\Yangyifan\Documents\GitHub\Communication-Component-Attempt\UpperTemp\TempUpper\TempUpper\bin\Debug\TempUpper.exe.config
-C:\Users\Yangyifan\Documents\GitHub\Communication-Component-Attempt\UpperTemp\TempUpper\TempUpper\obj\Debug\TempUpper.exe
-C:\Users\Yangyifan\Documents\GitHub\Communication-Component-Attempt\UpperTemp\TempUpper\TempUpper\obj\Debug\TempUpper.pdb
