@@ -449,7 +449,16 @@ namespace TempUpper
 
         private void DealSampleData(UserDatas.SampleData Data)
         {
-
+            if (this.InvokeRequired)
+            {
+                //在此使窗体主线程异步地重新调用委托
+                BeginInvoke(Datas.SampleDataHandler, Data);
+            }
+            else
+            {
+                //在此写入实际修改窗体控件的操作
+                this.lb_TestKp.Text = Data.Time.ToString();
+            }
         }
 
         //程序初始化时进行的操作

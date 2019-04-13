@@ -204,12 +204,64 @@ namespace TempUpper
 
         #region 自定义数据解析
 
+        /**  关于自定义数据解析部分的说明
+         * 
+         * 自定义数据解析中包含了两种处理方式：
+         * 
+         * ①状态数据，即在需要时读取即可的数据，
+         *  此类数据被直接以公共字段的形式被不断更新；
+         * 
+         * ②指令/关键信息，即每回传一次都需要及时处理的数据，
+         *  此类数据在每次接收到之后会调用相应的处理委托函数，该委托需要用户另外实现；
+         * 
+         * <note> 关于数据处理委托:
+         * 1)委托变量在该类被实例化的时候初始化为null，
+         *  因此使用前应该调用其对应的初始化函数对其进行初始化，该操作将在3)中给予示例。
+         *  
+         * 2)由于数据处理函数是在串口接收线程中被调用，
+         *  而数据处理读取和更新的时候往往涉及窗体控件的修改（跨线程调用窗体控件），
+         *  因此委托的实现应有特殊写法，该写法将在3)中给予示例。
+         * 
+         * 3)调用范例：
+         * 
+         *  ·对于委托(在本类中声明）：
+         *   //采样数据处理委托
+         *   public delegate void SampleDataHandlerTypedef(SampleData Data);
+         *   //委托实体字段
+         *   public SampleDataHandlerTypedef SampleDataHandler = null;
+         *   //委托初始化函数
+         *   public void SampleHandlerInit(SampleDataHandlerTypedef Handler)
+         *   {
+         *       SampleDataHandler = Handler;
+         *   }
+         *   
+         *  ·初始化操作（在调用方）：
+         *   //初始化处理方法
+         *   Datas.SampleHandlerInit(new UserDatas.SampleDataHandlerTypedef(DealSampleData));
+         *   [其中，“Datas”为本类的一个实例，“DealSampleData”为委托的实现↓]
+         *   
+         *  ·委托实现（在调用方）：
+         *   private void DealSampleData(UserDatas.SampleData Data)
+         *   {
+         *       if (this.InvokeRequired)
+         *       {
+         *           //在此使调用方所在的线程重新调用委托
+         *           BeginInvoke(Datas.SampleDataHandler, Data);
+         *       }
+         *       else
+         *       {
+         *           //在此写入实际修改窗体控件的操作
+         *           this.lb_TestKp.Text = Data.Time.ToString();
+         *       }
+         *   }
+         */
+
         #region 由回调操作产生的委托集合
 
         //采样数据处理委托
         public delegate void SampleDataHandlerTypedef(SampleData Data);
         //委托实体字段
-        private SampleDataHandlerTypedef SampleDataHandler = null;
+        public SampleDataHandlerTypedef SampleDataHandler = null;
         //初始化委托
         public void SampleHandlerInit(SampleDataHandlerTypedef Handler)
         {
@@ -219,7 +271,7 @@ namespace TempUpper
         //PID数据回传处理委托
         public delegate void PIDDataHandlerTypedef(PIDDataGetTypedef Data);
         //委托实体字段
-        private PIDDataHandlerTypedef PIDDataHandler = null;
+        public PIDDataHandlerTypedef PIDDataHandler = null;
         //初始化委托
         public void PIDDataHandlerInit(PIDDataHandlerTypedef Handler)
         {

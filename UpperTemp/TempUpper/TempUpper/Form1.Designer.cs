@@ -58,6 +58,8 @@
             this.tb_Remark = new System.Windows.Forms.TextBox();
             this.btn_test = new System.Windows.Forms.Button();
             this.SendTimer = new System.Windows.Forms.Timer(this.components);
+            this.label7 = new System.Windows.Forms.Label();
+            this.lb_TestKp = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnSOpen
@@ -382,11 +384,33 @@
             this.SendTimer.Interval = 1;
             this.SendTimer.Tick += new System.EventHandler(this.SendTimer_Tick);
             // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(113, 254);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(53, 12);
+            this.label7.TabIndex = 54;
+            this.label7.Text = "Test Kp:";
+            // 
+            // lb_TestKp
+            // 
+            this.lb_TestKp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lb_TestKp.AutoSize = true;
+            this.lb_TestKp.Location = new System.Drawing.Point(172, 254);
+            this.lb_TestKp.Name = "lb_TestKp";
+            this.lb_TestKp.Size = new System.Drawing.Size(53, 12);
+            this.lb_TestKp.TabIndex = 55;
+            this.lb_TestKp.Text = "0Byte(s)";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(359, 275);
+            this.Controls.Add(this.lb_TestKp);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.btn_test);
             this.Controls.Add(this.tb_Remark);
             this.Controls.Add(this.btn_ClearRemark);
@@ -453,6 +477,8 @@
         private System.Windows.Forms.TextBox tb_Remark;
         private System.Windows.Forms.Button btn_test;
         private System.Windows.Forms.Timer SendTimer;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lb_TestKp;
     }
 }
 
