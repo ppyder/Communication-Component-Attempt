@@ -464,6 +464,8 @@ namespace TempUpper
         //程序初始化时进行的操作
         private void InitProgram()
         {
+            byte[] test = Datas.HexString2ByteArray("AA BB    CC");
+
             //扫描串口并更新下拉框
             ScanCurrentSerialPort();
 
@@ -478,6 +480,8 @@ namespace TempUpper
 
             //初始化处理方法
             Datas.SampleHandlerInit(new UserDatas.SampleDataHandlerTypedef(DealSampleData));
+
+
         }
 
         //扫描电脑当前的串口并更新到下拉框中

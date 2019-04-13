@@ -131,10 +131,10 @@ namespace TempUpper
             //处理数字转换
             string sendBuf = data;
 
-            sendBuf.Replace(',', ' ');          //去掉英文逗号，以空格替换
-            sendBuf.Replace('，', ' ');         //去掉中文逗号，以空格替换
-            sendBuf.Replace("0x", "");          //去掉0x
-            sendBuf.Replace("0X", "");          //去掉0X
+            sendBuf = sendBuf.Replace(',', ' ');          //去掉英文逗号，以空格替换
+            sendBuf = sendBuf.Replace('，', ' ');         //去掉中文逗号，以空格替换
+            sendBuf = sendBuf.Replace("0x", "");          //去掉0x
+            sendBuf = sendBuf.Replace("0X", "");          //去掉0X
 
             //按照空格间隔的方式将待发送的字符串分割
             string[] strArray = sendBuf.Split(' ');
