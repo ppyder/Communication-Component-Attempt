@@ -193,18 +193,24 @@ namespace TempUpper
         //上层动作调试指令
         public struct ActionDebugCMDTypedef
         {
-            public byte SetPickMotorPos;    //设定抓取电机的位置(待标定)
-            public byte SetShootMotorSpeed; //设定发射电机的速度（机构向前推为负，单位mm/s）
             public byte SetSteerPos;        //设定交接舵机的角位置（0-180，单位°）
             public byte CylinderCMD;        //气缸控制指令（第0位大气缸，第1位小气缸，1为推出）
+            public byte SetHandoverMotorPos; //设定交接电机的位置（0-180，单位°）
+            byte Reserve1;                  //预留占位符1
+
+            public short SetPickMotorPos;    //设定抓取电机的位置(待标定)
+            public short SetShootMotorSpeed; //设定发射电机的速度（机构向前推为负，单位mm/s）
 
         };
 
         //上层动作调试信息
         public struct ActionDebugDataTypedef
         {
-            public ushort PickMotorPos;    //抓取电机的位置(待标定)
-            public ushort ShootMotorSpeed; //发射电机的速度（机构向前推为负，单位mm/s）
+            public ushort HandoverMotorPos; //交接电机的位置（（0-180，单位°）
+            public ushort HandoverSteerPos; //交接舵机的位置（（0-180，单位°）
+
+            public short PickMotorPos;    //抓取电机的位置(待标定)
+            public short ShootMotorSpeed; //发射电机的速度（机构向前推为负，单位mm/s）
 
         };
 
@@ -304,8 +310,10 @@ namespace TempUpper
             public bool isActionDoing;  //标记上层动作是否在进行中
 
             /*****************  上层测试  ******************/
-            public ushort PickMotorPos;    //抓取电机的位置(待标定)
-            public ushort ShootMotorSpeed; //发射电机的速度（机构向前推为负，单位mm/s）
+            public ushort HandoverMotorPos; //交接电机的位置（（0-180，单位°）
+            public ushort HandoverSteerPos; //交接舵机的位置（（0-180，单位°）
+            public short PickMotorPos;    //抓取电机的位置(待标定)
+            public short ShootMotorSpeed; //发射电机的速度（机构向前推为负，单位mm/s）
         };
 
         #endregion

@@ -256,18 +256,24 @@ typedef struct
 //上层动作调试指令
 typedef struct
 {
-    uint8_t SetPickMotorPos;    //设定抓取电机的位置(待标定)
-    uint8_t SetShootMotorSpeed; //设定发射电机的速度（机构向前推为负，单位mm/s）
     uint8_t SetSteerPos;        //设定交接舵机的角位置（0-180，单位°）
     uint8_t CylinderCMD;        //气缸控制指令（第0位大气缸，第1位小气缸，1为推出）
+    uint8_t SetHandoverMotorPos; //设定交接电机的位置（0-180，单位°）
+    uint8_t Reserve;             //预留占位符
+
+    int16_t SetPickMotorPos;    //设定抓取电机的位置(待标定)
+    int16_t SetShootMotorSpeed; //设定发射电机的速度（机构向前推为负，单位mm/s）
     
 }ActionDebugCMDTypedef;
 
 //上层动作调试信息
 typedef struct
 {
-    uint16_t PickMotorPos;    //抓取电机的位置(待标定)
-    uint16_t ShootMotorSpeed; //发射电机的速度（机构向前推为负，单位mm/s）
+    uint16_t HandoverMotorPos; //交接电机的位置（（0-180，单位°）
+    uint16_t HandoverSteerPos; //交接舵机的位置（（0-180，单位°）
+    
+    int16_t PickMotorPos;    //抓取电机的位置(待标定)
+    int16_t ShootMotorSpeed; //发射电机的速度（机构向前推为负，单位mm/s）
     
 }ActionDebugDataTypedef;
 

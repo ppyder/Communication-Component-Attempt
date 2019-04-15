@@ -44,6 +44,16 @@ static inline COM_ModuleID UART_DealFuncMap(UART_HandleTypeDef *UartHandle)
         result = COM_MSTR;//COM_PC;
     }
     
+//如果使用板间串口
+#if defined(USING_BSP_UART)
+
+    if(BSP_COM_UART == UartHandle->Instance)
+    {
+        result = COM_BSP;
+    }
+
+#endif /*  IS_USING_BSP_CAN  */
+    
     return result;
 }
 
@@ -52,10 +62,15 @@ static inline COM_ModuleID CAN_DealFuncMap(CAN_HandleTypeDef *CanHandle)
 {
     COM_ModuleID result;
     
+//如果使用板间CAN
+#if defined(USING_BSP_CAN)
+
     if(BSP_COM_CAN == CanHandle->Instance)
     {
         result = COM_BSP;
     }
+
+#endif /*  IS_USING_BSP_CAN  */
     
     return result;
 }

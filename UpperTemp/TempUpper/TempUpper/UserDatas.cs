@@ -380,6 +380,9 @@ namespace TempUpper
             //将数据更新
             Rx_ActionDebugMsg = (ActionDebugDataTypedef)BytesToStruct(Buffer, GetSize(typeof(Globle_Datahead)), typeof(ActionDebugDataTypedef));
 
+            Rx_MR1State.HandoverMotorPos = Rx_ActionDebugMsg.HandoverMotorPos;
+            Rx_MR1State.HandoverSteerPos = Rx_ActionDebugMsg.HandoverSteerPos;
+
             Rx_MR1State.PickMotorPos = Rx_ActionDebugMsg.PickMotorPos;
             Rx_MR1State.ShootMotorSpeed = Rx_ActionDebugMsg.ShootMotorSpeed;
 
