@@ -213,6 +213,8 @@ namespace TempUpper
                 {
                     //打开串口
                     Comunication.OpenSerialPort(cbSerial.SelectedItem.ToString());
+                    //调用断线重联函数
+                    Comunication.ReConnectSlave();
 
                     //使能发送定时器
                     SendTimer.Enabled = true;

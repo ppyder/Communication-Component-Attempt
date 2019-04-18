@@ -47,7 +47,7 @@ static inline COM_ModuleID UART_DealFuncMap(UART_HandleTypeDef *UartHandle)
 //如果使用板间串口
 #if defined(USING_BSP_UART)
 
-    if(BSP_COM_UART == UartHandle->Instance)
+    else if(BSP_COM_UART == UartHandle->Instance)
     {
         result = COM_BSP;
     }

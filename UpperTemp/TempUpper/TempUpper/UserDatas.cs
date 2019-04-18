@@ -329,6 +329,8 @@ namespace TempUpper
             Rx_MR1State.CoordinateY = Rx_BaseMotionMsg.CoordinateY;
             Rx_MR1State.PoseAngle = Rx_BaseMotionMsg.PoseAngle;
 
+            Rx_MR1State.UpdatedMsgType = MsgTypesID.Rx_BaseMotionData;
+
             return MsgTypesID.Rx_BaseMotionData;
         }
 
@@ -350,6 +352,8 @@ namespace TempUpper
             Rx_MR1State.CoordinateY = Rx_PlanMotionMsg.CoordinateY;
             Rx_MR1State.PoseAngle = Rx_PlanMotionMsg.PoseAngle;
 
+            Rx_MR1State.UpdatedMsgType = MsgTypesID.Rx_PlanMotionTestData;
+
             return MsgTypesID.Rx_PlanMotionTestData;
         }
 
@@ -369,6 +373,8 @@ namespace TempUpper
             Rx_MR1State.CoordinateY = Rx_MR1AutoMotionMsg.CoordinateY;
             Rx_MR1State.PoseAngle = Rx_MR1AutoMotionMsg.PoseAngle;
 
+            Rx_MR1State.UpdatedMsgType = MsgTypesID.Rx_AutoProcessData;
+
             return MsgTypesID.Rx_AutoProcessData;
         }
 
@@ -385,6 +391,8 @@ namespace TempUpper
 
             Rx_MR1State.PickMotorPos = Rx_ActionDebugMsg.PickMotorPos;
             Rx_MR1State.ShootMotorSpeed = Rx_ActionDebugMsg.ShootMotorSpeed;
+
+            Rx_MR1State.UpdatedMsgType = MsgTypesID.Rx_UpperActionDebugData;
 
             return MsgTypesID.Rx_UpperActionDebugData;
         }

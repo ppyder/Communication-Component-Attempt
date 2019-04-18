@@ -100,6 +100,14 @@ Develop COM methods.
 
 + **<待填充>**
 
+### 6.该组件在范例工程中的位置
+> 相关目录为：.\UpperTemp\TempUpper\TempUpper\\...
+>> 1. InterfaceToSlave.cs
+>> 2. UserDatas.cs
+>> 3. UserData_MsgDefine.cs
+>> 4. ComEntity.cs
+>> 5. DataTools.cs
+
 ---------------------
 
 ## <font color ="blue">下位机组件特性</font>
@@ -161,5 +169,21 @@ Develop COM methods.
 
 + **<待填充>**
 
+### 5.该组件在范例工程中的位置
+> 相关目录为：
+> 1. 通信组件底层：.\STM32_Demo_F4\ClassDemo\HEROLib\Dev_Interface\Comunication\\...
+>> 1. Com_CanDriver.c   -> Can驱动
+>> 2. Com_CanDriver.h
+>> 3. ComStructDef.h    -> 结构体定义
+>> 4. Comunication.c    -> 通信组件机制实现
+>> 5. Comunication.h
+> 2. 半双工机制实现：.\STM32_Demo_F4\ClassDemo\HEROLib\Universal\Simu_Half_Duplex\\...
+>> 1. Half_Duplex.c
+>> 2. Half_Duplex.h
+> 3. 具体与某设备的通信组件：.\STM32_Demo_F4\ClassDemo\HEROLib\Devices\\...
+>> 1. .\BSP_Communication   -> 板间通信
+>> 2. .\PC_Communication    -> 与小电脑通信
+>> 3. .\Master_Communication-> 与上位机通信
+>> 4. .\M3508               -> 与M3508通信
 
 #### <font color ="purple">@ppyder</font> 2019.04.11

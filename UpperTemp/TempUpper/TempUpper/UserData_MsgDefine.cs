@@ -280,6 +280,9 @@ namespace TempUpper
 
         public struct Mr1State
         {
+            //更新状态标识，指示最后一次更新的状态参量是谁
+            public MsgTypesID UpdatedMsgType;
+
             /*****************  通用  ******************/
             //底盘速度大小（模，单位mm/s）
             public float Speed;
@@ -322,7 +325,7 @@ namespace TempUpper
 
         public const byte Datahead1 = 0xaa, Datahead2 = 0xbb;
 
-        //通信数据类型标识集合（发送和接收分别从0开始）
+        //通信数据类型标识集合（发送和接收分别从0开始，一一对应）
         public enum MsgTypesID
         {
             /***********  发送组  *************/

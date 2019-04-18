@@ -179,7 +179,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 //            //半双工发送测试数据
 //            Hf_SendData(&BSP_HfCOM, MstrTx_SampleData);
           
-           Mstr_COM_Module.SendData(MstrTx_BaseMotionData);
+           //Mstr_COM_Module.SendData(MstrTx_BaseMotionData);
             DuringSampling();
        }
    }
