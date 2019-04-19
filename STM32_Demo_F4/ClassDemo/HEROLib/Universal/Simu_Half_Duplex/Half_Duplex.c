@@ -18,8 +18,16 @@
 
 #include "Half_Duplex.h"
 
+//对异常的描述,配合组件错误码使用
+char *Hf_ErrorDescriptions[COM_ErrorCodeNum] = 
+{
+    "未出错",                                      // @Hf_NoError
+    "使用前未初始化该通信组件！\n",                // @Hf_Error_UnInited,
+};
+
 //私有函数声明
 void BlockErrorHandler(void);
+void Hf_ErrorHandler(Hf_ErrorCode ErrorCode, Hf_DuplexTypedef *pModule);
 
 //用于缺省初始化的空通信组件结构体
 static COMInfoTypedef NULL_COM = {0};
@@ -38,20 +46,37 @@ void Hf_DuplexStructDeInit(Hf_DuplexTypedef *pModule)
     
     pModule->pCOM = &NULL_COM;
     pModule->pBlockError = BlockErrorHandler;
+    
+    //复位错误标志及其描述
+    pModule->ErrorCode = Hf_NoError;
+    pModule->ErrorDescription = Hf_ErrorDescriptions[Hf_NoError];
+    
+    //标记已经初始化过
+    pModule->isInited = true;
 }
 
 //接收函数(需在接收完成后调用，用于复位接收标志)
 void Hf_HaveReceived(Hf_DuplexTypedef *pModule)
 {
+    if(false == pModule->isInited)
+    {
+        //若本通信组件还未初始化过
+        Hf_ErrorHandler(Hf_Error_UnInited, pModule);
+    }
+    
     pModule->isGetMsg = true;
     pModule->isBlocked  = false;
 }
 
-uint32_t testCnt = 0;
-
 //发送函数
 void Hf_SendData(Hf_DuplexTypedef *pModule, uint8_t CMD)
 {
+    if(false == pModule->isInited)
+    {
+        //若本通信组件还未初始化过
+        Hf_ErrorHandler(Hf_Error_UnInited, pModule);
+    }
+    
     //如果已经接收到数据，便意味着可以发送数据了
     if(pModule->isGetMsg)
     {
@@ -68,12 +93,7 @@ void Hf_SendData(Hf_DuplexTypedef *pModule, uint8_t CMD)
     {
         //如果发送请求因等待接收而被驳回，便记录下来
         pModule->RqstErrorCnt++;
-        
-        if(testCnt < pModule->RqstErrorCnt)
-        {
-            testCnt = pModule->RqstErrorCnt;
-        }
-        
+                
         //驳回次数过多则调用错误处理函数
         if(pModule->ErrorCntMax > 0 && pModule->RqstErrorCnt > pModule->ErrorCntMax)
         {
@@ -93,12 +113,23 @@ void Hf_Reconnect(Hf_DuplexTypedef *pModule)
     Hf_SendData(pModule, 0);
 }
 
-//弱定义的通信阻塞处理函数
-__weak void BlockErrorHandler(void)
+//预置的通信阻塞处理函数
+void BlockErrorHandler(void)
 {
     while(1)
     {
-        
+        //进入这里说明该组件的异常处理函数忘记自己在外部实现了。
     }
 }
 
+//半双工通信的异常处理函数
+void Hf_ErrorHandler(Hf_ErrorCode ErrorCode, Hf_DuplexTypedef *pModule)
+{
+    //如果不是正常状态
+    while(COM_NoError != ErrorCode)
+    {
+        //卡在这里说明被调用的这个通信组件出了问题，请在对应组件的错误描述中查看，该组件地址已传入本函数。
+        pModule->ErrorCode = ErrorCode;
+        pModule->ErrorDescription = Hf_ErrorDescriptions[ErrorCode];
+    }
+}

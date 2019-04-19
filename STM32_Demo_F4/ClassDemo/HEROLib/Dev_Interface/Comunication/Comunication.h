@@ -10,8 +10,11 @@
 //组件实体列表，对应于顺序指针数组赋值，便于管理
 typedef enum 
 {
+    //空通信组件结构体，用于标识在Map函数中未找到组件的情况
+    COM_NULL = 0x00,
+    
     //小电脑通信组件
-    COM_PC = 0x00,
+    COM_PC,
     
     //控制端通信组件
     COM_MSTR,
@@ -22,6 +25,9 @@ typedef enum
     COM_ModulesNum
     
 }COM_ModuleID;
+
+//错误描述集合
+extern char *COM_ErrorDescriptions[COM_ErrorCodeNum];
 
 //空指令，用于作为各种通信组件的指令占位
 #define NULL_MESSAGE 0

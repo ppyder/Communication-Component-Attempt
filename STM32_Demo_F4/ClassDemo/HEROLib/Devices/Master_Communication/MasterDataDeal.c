@@ -2,14 +2,14 @@
 #include "TestCtrl.h"
 
 //获取到的数据公示
-SampleCMDTypedef SampleCMD = {0};
+SampleCMDTypedef SampleCMD;
 //实际采样时更新的值
-SampleDataTypedef SampelData = {0};
-BaseMotionDataTypedef BaseMotionData = {0};
-BasePlanDataTypedef    BasePlanData = {0};
-MR1CtrlDataTypedef    Mr1CtrlData = {0};
-ActionDebugDataTypedef  ActionebugData = {0};
-PIDDataGetTypedef       PIDDataFeedback = {0};
+SampleDataTypedef SampelData;
+BaseMotionDataTypedef BaseMotionData;
+BasePlanDataTypedef    BasePlanData;
+MR1CtrlDataTypedef    Mr1CtrlData;
+ActionDebugDataTypedef  ActionebugData;
+PIDDataGetTypedef       PIDDataFeedback;
 
 //接收到的数据反馈值，初始化为空指令
 enum MstrRxMsgTypes RxMsgTypeFeedBack = MstrRx_EmptyCMD;

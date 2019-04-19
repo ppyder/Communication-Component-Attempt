@@ -78,7 +78,7 @@ static void MX_NVIC_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-    
+
   /* USER CODE END 1 */
 
   /* MCU Configuration----------------------------------------------------------*/

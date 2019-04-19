@@ -62,6 +62,13 @@ void BSP_COM_ModuleInit(COMInfoTypedef *pModule)
     pModule->TxBufSize = sizeof(BSP_TxBufTypedef);
     pModule->SendCnt = 0;
     
+    //标记已经初始化完成
+    pModule->isInited = true;
+    
+    //复位错误标志及其描述
+    pModule->ErrorCode = COM_NoError;
+    pModule->ErrorDescription = COM_ErrorDescriptions[COM_NoError];
+    
     /* 使能接收，进入中断回调函数 */
     HAL_UART_Receive_IT(&BSP_COM_HUART, 
                         (uint8_t*)pModule->pRxBuffer[pModule->RxBufFlag], 

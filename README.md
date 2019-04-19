@@ -172,18 +172,18 @@ Develop COM methods.
 ### 5.该组件在范例工程中的位置
 > 相关目录为：
 > 1. 通信组件底层：.\STM32_Demo_F4\ClassDemo\HEROLib\Dev_Interface\Comunication\\...
->> 1. Com_CanDriver.c   -> Can驱动
+>> 1. Com_CanDriver.c   &emsp;&ensp;-> Can驱动
 >> 2. Com_CanDriver.h
->> 3. ComStructDef.h    -> 结构体定义
->> 4. Comunication.c    -> 通信组件机制实现
+>> 3. ComStructDef.h    &emsp;&emsp;-> 结构体定义
+>> 4. Comunication.c    &emsp;&emsp;-> 通信组件机制实现
 >> 5. Comunication.h
 > 2. 半双工机制实现：.\STM32_Demo_F4\ClassDemo\HEROLib\Universal\Simu_Half_Duplex\\...
 >> 1. Half_Duplex.c
 >> 2. Half_Duplex.h
 > 3. 具体与某设备的通信组件：.\STM32_Demo_F4\ClassDemo\HEROLib\Devices\\...
->> 1. .\BSP_Communication   -> 板间通信
->> 2. .\PC_Communication    -> 与小电脑通信
->> 3. .\Master_Communication-> 与上位机通信
->> 4. .\M3508               -> 与M3508通信
+>> 1. .\BSP_Communication\\...  &emsp;&emsp;-> 板间通信
+>> 2. .\PC_Communication\\...   &emsp;&emsp;&ensp;-> 与小电脑通信
+>> 3. .\Master_Communication\\... &emsp;-> 与上位机通信
+>> 4. .\M3508\\...  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;-> 与M3508通信
 
-#### <font color ="purple">@ppyder</font> 2019.04.11
+#### <font color ="purple">@ppyder</font> 2019.04.19

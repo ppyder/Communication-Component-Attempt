@@ -6,9 +6,33 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+typedef enum 
+{
+    //无错误
+    Hf_NoError = 0,
+    
+    //未初始化结构体
+    Hf_Error_UnInited,
+    
+    Hf_ErrorCodeNum
+    
+}Hf_ErrorCode;
+
 //结构体定义：半双工机制实现结构体
 typedef struct 
 {
+    //标识是否已经初始化该结构体
+    bool isInited;
+    
+    /***************  异常处理  ****************/
+    //错误码
+    Hf_ErrorCode ErrorCode;
+    
+    //对本组件异常的文字性描述
+    char* ErrorDescription;
+    
+    /*************  END -> 异常处理  ************/
+    
     /************  链接状态标识  ************/
     //标识当前本组件是否处于阻塞状态
     bool isBlocked;

@@ -6,6 +6,22 @@
 
 #include "stm32f4xx_hal.h"
 
+//针对组件使用过程中的错误进行集中管理
+typedef enum 
+{
+    //无错误
+    COM_NoError = 0,
+    
+    //未初始化通信组件
+    COM_Error_UnInited,
+    
+    //未在通信组件映射函数中找到对应的组件标号
+    COM_Error_UnFindModule,
+    
+    COM_ErrorCodeNum
+    
+}COM_ErrorCode;
+
 //这里定义了通信组件结构体以及通信载体枚举
 
 typedef enum
@@ -31,7 +47,18 @@ typedef struct
     
     /*************  END -> 外设相关  ************/
     
+    /***************  异常处理  ****************/
+    //错误码
+    COM_ErrorCode ErrorCode;
+    
+    //对本组件异常的文字性描述
+    char* ErrorDescription;
+    
+    /*************  END -> 异常处理  ************/
+    
     /***************  通信组件通用  ****************/
+    //标记本组件是否被初始化过，用以做安全保护，不然极易因访问禁止区域而进入HardFault。
+    bool isInited;
     
     //接收缓冲区地址(预留双缓冲)
     void *pRxBuffer[2];
