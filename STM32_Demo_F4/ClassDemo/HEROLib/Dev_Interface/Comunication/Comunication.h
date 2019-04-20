@@ -5,26 +5,9 @@
 #include "usart.h"
 #include "can.h"
 
-/*  通信组件接口，使用双缓冲区接收，单缓冲区发送，支持定长数据接收，定长/不定长数据发送  */
+//关于该组件的说明，见头文件 @"Com_Functions.h"
 
-//组件实体列表，对应于顺序指针数组赋值，便于管理
-typedef enum 
-{
-    //空通信组件结构体，用于标识在Map函数中未找到组件的情况
-    COM_NULL = 0x00,
-    
-    //小电脑通信组件
-    COM_PC,
-    
-    //控制端通信组件
-    COM_MSTR,
-    
-    //板间通信组件
-    COM_BSP,
-    
-    COM_ModulesNum
-    
-}COM_ModuleID;
+/*  通信组件接口，使用双缓冲区接收，单缓冲区发送，支持定长数据接收，定长/不定长数据发送  */
 
 //错误描述集合
 extern char *COM_ErrorDescriptions[COM_ErrorCodeNum];
@@ -32,15 +15,7 @@ extern char *COM_ErrorDescriptions[COM_ErrorCodeNum];
 //空指令，用于作为各种通信组件的指令占位
 #define NULL_MESSAGE 0
 
-//便于集中管理的通信组件集合
-extern COMInfoTypedef *COM_Modules[COM_ModulesNum];
-
-//CAN接收滤波器初始化函数
-void CAN_Filter_Config(CAN_HandleTypeDef* hcan);
-
-//数据发送函数
+//数据发送函数（直接发送已经存在于缓冲区中的数据）
 bool COM_SendData(COMInfoTypedef *pModule);
-bool COM_SendUnformatData(COMInfoTypedef *pModule, uint8_t *pData, uint32_t DataSzie);
-bool COM_CANSendUnformatData(COMInfoTypedef *pModule, CAN_TxHeaderTypeDef *pHeader, uint8_t *pData, uint16_t Size);
 
 #endif

@@ -17,20 +17,6 @@
  *      发送频率是单帧数据1ms发送一次，打包数据>10ms一次。
  */
 
-//以自定义通信协议发送的数据ID集合
-const uint32_t CAN_FormatStdIDs[] = 
-{
-    0x2FF,           //板间通信ID
-};
-
-//以非自定义通信协议发送的数据ID集合
-const uint32_t CAN_UnformatStdIDs[] = 
-{
-    0x200 + 0x01,   //M3508的返回数据_电机1
-    0x200 + 0x02,   //M3508的返回数据_电机2
-    0x200 + 0x03,   //M3508的返回数据_电机3
-};
-
 //CAN发送邮箱状态指示(是否空闲)
 bool isTxMailBoxFree[3] = {true, true, true};
 

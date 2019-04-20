@@ -2,7 +2,7 @@
 #define COMTOPC_H
 
 #include "PC_Data.h"
-#include "Comunication.h"
+#include "Com_Functions.h"
 
 //结构体定义：接收数据缓冲区
 typedef struct
@@ -47,6 +47,6 @@ extern CrossDataType   CrossData;
 extern PickDataType    PickData;
 
 //初始化PC通信组件的模块初始化函数
-void PC_COM_ModuleInit(volatile COMInfoTypedef *pModule);
+void PC_COM_ModuleInit(COMInfoTypedef *pModule);
 
 #endif

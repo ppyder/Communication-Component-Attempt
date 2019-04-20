@@ -1,4 +1,5 @@
 #include "ComToBSP.h"
+#include "Comunication.h"
 
 //与BSP通信的通信组件实体定义
 COMInfoTypedef BSP_COM_Module = {0};
@@ -26,49 +27,15 @@ BSP_RxBufTypedef BSP_RxBuffer[2];
 //初始化CAN本接口对应的通信组件
 void BSP_COM_ModuleInit(COMInfoTypedef *pModule)
 {
-    //复位半双工结构体
-    Hf_DuplexStructDeInit(&BSP_HfCOM);
-    
-    //设定半双工请求驳回次数上限
-    BSP_HfCOM.ErrorCntMax = BSP_REQUEST_ERROR_MAX;
-    
-    //绑定通信组件
-    BSP_HfCOM.pCOM = pModule;
-    
-    //绑定硬件接口
-    pModule->UartHandle = &BSP_COM_HUART;
-    
-    //标记所使用的通信载体是串口
-    pModule->COM_type = SPPRTR_UART;
-    
-    //绑定数据处理方法
-    pModule->DealData = DealBSPData;
-    
-    //绑定数据发送方法
-    pModule->SendData = SendDataToBSP;
-    
-    //绑定接收缓冲区
-    pModule->pRxBuffer[0] = BSP_RxBuffer;
-    pModule->pRxBuffer[1] = BSP_RxBuffer + 1;
-    pModule->RxBufSize = BSP_RX_BUFFERSIZE;
-    pModule->Rx_NextRcvLength = BSP_RX_BUFFERSIZE;
-    pModule->isCorrectHead = false;
-    pModule->RxBufFlag = false;
-    pModule->RxPackRcvCnt = 0;
-    pModule->RxErrorPackCnt = 0;
-    
-    //绑定发送缓冲区
-    pModule->pTxBuffer = &BSP_TxBuffer;
-    pModule->TxBufSize = sizeof(BSP_TxBufTypedef);
-    pModule->SendCnt = 0;
-    
-    //标记已经初始化完成
-    pModule->isInited = true;
-    
-    //复位错误标志及其描述
-    pModule->ErrorCode = COM_NoError;
-    pModule->ErrorDescription = COM_ErrorDescriptions[COM_NoError];
-    
+    //初始化半双工结构体，绑定通信组件，不使用阻塞处理
+    Hf_DuplexStructInit(&BSP_HfCOM, pModule, BSP_REQUEST_ERROR_MAX, NULL);
+        
+    //以串口方式初始化通信组件
+    COM_UART_StructInit(pModule, &BSP_COM_HUART,
+                        DealBSPData, SendDataToBSP,
+                        BSP_RxBuffer, BSP_RX_BUFFERSIZE,
+                        &BSP_TxBuffer, sizeof(BSP_TxBufTypedef));
+        
     /* 使能接收，进入中断回调函数 */
     HAL_UART_Receive_IT(&BSP_COM_HUART, 
                         (uint8_t*)pModule->pRxBuffer[pModule->RxBufFlag], 
@@ -290,47 +257,18 @@ uint8_t Rece_Date1[8] = {0};
 
 //初始化CAN本接口对应的通信组件
 void BSP_COM_ModuleInit(COMInfoTypedef *pModule)
-{
-    //复位半双工结构体
-    Hf_DuplexStructDeInit(&BSP_HfCOM);
+{    
+    //初始化半双工结构体，绑定通信组件，不使用阻塞处理
+    Hf_DuplexStructInit(&BSP_HfCOM, pModule, BSP_REQUEST_ERROR_MAX, NULL);
     
-    BSP_HfCOM.ErrorCntMax = BSP_REQUEST_ERROR_MAX;
-    
-    //绑定通信组件
-    BSP_HfCOM.pCOM = pModule;
-    
-    //绑定硬件接口
-    pModule->CanHandle = &BSP_COM_HCAN;
-    pModule->COM_type = SPPRTR_CAN;
-    
-    //绑定数据发送接收头结构体
-    pModule->pRxHeader = &BSP_RxHeader;
-    pModule->pTxHeader = &BSP_TxHeader;
-    
-    //绑定数据处理方法
-    pModule->DealData = DealBSPData;
-    
-    //绑定数据发送方法
-    pModule->SendData = SendDataToBSP;
-    
-    //绑定首帧数据处理方法
-    pModule->Can_IsHeadData = CAN_IsBSP_PackHead;
-    
-    //绑定接收缓冲区（can为单缓冲）
-    pModule->pRxBuffer[0]   = &BSP_RxBuffer;
-    pModule->pRxBuffer[1]   = &BSP_RxBuffer;
-    pModule->RxBufSize      = BSP_RX_BUFFERSIZE;
-    pModule->IsRcvingUnhead = false;
-    pModule->RxlengthCnt    = 0;
-    
-    pModule->RxBufFlag      = false;
-    pModule->RxPackRcvCnt   = 0;
-    pModule->RxErrorPackCnt = 0;
-    
-    //绑定发送缓冲区
-    pModule->pTxBuffer = &BSP_TxBuffer;
-    pModule->TxBufSize = sizeof(BSP_TxBufTypedef);
-    pModule->SendCnt   = 0;
+    //以CAN方式初始化通信组件
+    COM_CAN_StructInit(pModule, &BSP_COM_HCAN,
+                        DealBSPData, SendDataToBSP,
+                        CAN_IsBSP_PackHead,
+                        &BSP_RxHeader,
+                        &BSP_TxHeader,
+                        &BSP_RxBuffer, BSP_RX_BUFFERSIZE,
+                        &BSP_TxBuffer, sizeof(BSP_TxBufTypedef));
     
     /* 使能接收，进入中断回调函数 */
     CAN_Filter_Config(&BSP_COM_HCAN);

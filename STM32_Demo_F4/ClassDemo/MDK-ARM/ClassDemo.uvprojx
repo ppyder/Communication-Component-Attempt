@@ -570,6 +570,11 @@
               <FileType>1</FileType>
               <FilePath>..\HEROLib\Dev_Interface\Comunication\Com_CanDriver.c</FilePath>
             </File>
+            <File>
+              <FileName>Com_UserModules.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HEROLib\Dev_Interface\Comunication\Com_UserModules.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

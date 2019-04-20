@@ -30,10 +30,17 @@ void BlockErrorHandler(void);
 void Hf_ErrorHandler(Hf_ErrorCode ErrorCode, Hf_DuplexTypedef *pModule);
 
 //用于缺省初始化的空通信组件结构体
-static COMInfoTypedef NULL_COM = {0};
+COMInfoTypedef NULL_COM;
 
-//赋予半双工通讯结构体缺省值
-void Hf_DuplexStructDeInit(Hf_DuplexTypedef *pModule)
+/**
+ * @brief	    初始化半双工通讯结构体
+ * @param[out]  pModule         指向用于实现半双工机制通信的通讯组件结构体(Hf_DuplexTypedef*)
+ * @param[in]   pCOM            指向通信组件结构体的指针(COMInfoTypedef*)
+ * @param[in]   pHandler        由用户实现的通信中断处理函数指针(void (*)(void*))
+ * @retval	    None.
+ */
+void Hf_DuplexStructInit(Hf_DuplexTypedef *pModule, COMInfoTypedef *pCOM, 
+                         uint32_t ErrorCntMax, void (*pHandler)(void))
 {
     //标记通信未堵塞
     pModule->isBlocked = false;
@@ -44,8 +51,16 @@ void Hf_DuplexStructDeInit(Hf_DuplexTypedef *pModule)
     pModule->RqstErrorCnt = 0;
     pModule->ErrorCntMax = 0;
     
-    pModule->pCOM = &NULL_COM;
-    pModule->pBlockError = BlockErrorHandler;
+    pModule->pCOM = pCOM;
+    
+    if(NULL == pHandler)
+    {
+        pModule->pBlockError = BlockErrorHandler;
+    }
+    else
+    {
+        pModule->pBlockError = pHandler;
+    }
     
     //复位错误标志及其描述
     pModule->ErrorCode = Hf_NoError;

@@ -1,44 +1,13 @@
 #include "Comunication.h"
 #include "Com_CanDriver.h"
-#include "ComToPC.h"
-#include "ComToMaster.h"
-#include "ComToBSP.h"
-#include "M3508.h"
-
-//内部声明的空组件结构体，用于标识未找到对应组件的情况
-COMInfoTypedef Null_COM_Module;
+#include "Com_UserModules.h"
 
 //对异常的描述,配合组件错误码使用
 char *COM_ErrorDescriptions[COM_ErrorCodeNum] = 
 {
     "未出错",                                      // @COM_NoError
     "使用前未初始化该通信组件！\n",                // @COM_Error_UnInited,
-    "未在组件Map函数中找到处理该数据的组件号！\n",   // @COM_Error_UnFindModule
-};
-
-//通信组件集合
-COMInfoTypedef *COM_Modules[COM_ModulesNum] = 
-{
-    //空组件结构体
-    &Null_COM_Module,
-    
-    //与小电脑的通信组件接口
-    &PC_COM_Module,
-    
-    //与控制端的通信组件接口
-    &Mstr_COM_Module,
-    
-    //与其他板子的通信组件接口
-    &BSP_COM_Module,
-};
-
-//can数据处理函数集合
-void (*pCANDataDealFuncs[CAN_IDsNum])(uint8_t *pData, uint32_t DataLength, COM_ModuleID COM_Type) = 
-{
-    RcvFormatCanData,   //格式化数据接收
-    Motor1DataDeal,     //M3508的返回数据_电机1
-    Motor2DataDeal,     //M3508的返回数据_电机2
-    Motor3DataDeal,     //M3508的返回数据_电机3
+    "未在组件Map函数中找到处理该数据的组件号！\n", // @COM_Error_UnFindModule
 };
 
 /* 私有函数声明 */
@@ -49,52 +18,143 @@ CAN_RxHeaderTypeDef RxHeader;
 //CAN单次数据接收缓存
 uint8_t CANDataBuf[8] = {0};
 
-/*******************  Map Of Modules  ***********************/
-
-//选择处理函数
-static inline COM_ModuleID UART_DealFuncMap(UART_HandleTypeDef *UartHandle)
+/*******************  默认初始化函数  ***********************/
+/**
+ * @brief	    按串口方式初始化通信组件结构体
+ * @param[out]  pModule         指向用于通信的通讯组件结构体(COMInfoTypedef*)
+ * @param[in]   pHuart          由Cube生成的代表所使用的口的结构体变量(UART_HandleTypeDef*)
+ * @param[in]   pDealData       由用户实现的数据接收处理函数指针(bool (*)(void*))
+ * @param[in]   pSendData       由用户实现的数据发送处理函数指针(bool (*)(uint8_t))
+ * @param[in]   pRcvBuffer      数据接收缓冲区地址(void *)
+ * @param[in]   RcvBufferSize   数据接收缓冲区长度(uint32_t)
+ * @param[in]   pSendBuffer     数据发送缓冲区地址(void *)
+ * @param[in]   SendBufferSize  数据发送缓冲区长度(uint32_t)
+ * @retval	    None.
+ */
+void COM_UART_StructInit(COMInfoTypedef *pModule, UART_HandleTypeDef *pHuart,
+                            bool (*pDealData)(void*), bool (*pSendData)(uint8_t),
+                            void *pRcvBuffer, uint32_t RcvBufferSize,
+                            void *pSendBuffer, uint32_t SendBufferSize)
 {
-    COM_ModuleID result = COM_NULL;
+    //中间变量，用于接收数据指针
+    uint8_t *pTemp = pRcvBuffer;
     
-    if(PC_COM_UART == UartHandle->Instance)
-    {
-        result = COM_MSTR;//COM_PC;
-    }
+    //绑定硬件接口
+    pModule->UartHandle = pHuart;
     
-//如果使用板间串口
-#if defined(USING_BSP_UART)
-
-    else if(BSP_COM_UART == UartHandle->Instance)
-    {
-        result = COM_BSP;
-    }
-
-#endif /*  IS_USING_BSP_CAN  */
+    //标记所使用的通信载体是串口
+    pModule->COM_type = SPPRTR_UART;
     
-    return result;
+    //绑定数据处理方法
+    pModule->DealData = pDealData;
+    
+    //绑定数据发送方法
+    pModule->SendData = pSendData;
+    
+    //绑定接收缓冲区,串口要求双缓冲区发送
+    pModule->pRxBuffer[0] = pTemp;
+    pModule->pRxBuffer[1] = (pTemp + RcvBufferSize);
+    pModule->RxBufSize = RcvBufferSize;
+    pModule->Rx_NextRcvLength = RcvBufferSize;
+    pModule->isCorrectHead = false;
+    pModule->RxBufFlag = false;
+    pModule->RxPackRcvCnt = 0;
+    pModule->RxErrorPackCnt = 0;
+    
+    //绑定发送缓冲区
+    pModule->pTxBuffer = pSendBuffer;
+    pModule->TxBufSize = SendBufferSize;
+    pModule->SendCnt = 0;
+    
+    //标记已经初始化完成
+    pModule->isInited = true;
+    
+    //复位错误标志及其描述
+    pModule->ErrorCode = COM_NoError;
+    pModule->ErrorDescription = COM_ErrorDescriptions[COM_NoError];
+    
 }
 
-//选择处理函数
-static inline COM_ModuleID CAN_DealFuncMap(CAN_HandleTypeDef *CanHandle)
+/**
+ * @brief	    按CAN方式初始化通信组件结构体
+ * @param[out]  pModule         指向用于通信的通讯组件结构体(COMInfoTypedef*)
+ * @param[in]   pHuart          由Cube生成的代表所使用的口的结构体变量(CAN_HandleTypeDef*)
+ * @param[in]   pDealData       由用户实现的数据接收处理函数指针(bool (*)(void*))
+ * @param[in]   pSendData       由用户实现的数据发送处理函数指针(bool (*)(uint8_t))
+ * @param[in]   pCan_IsHeadData 由用户实现的辨识某帧数据是否是数据包头的函数指针(bool (*)(void*, uint32_t))
+ * @param[in]   pRxHeader       指向接收数据帧头(CAN_RxHeaderTypeDef*)
+ * @param[in]   pTxHeader       指向发送数据帧头(CAN_TxHeaderTypeDef*)
+ * @param[in]   pRcvBuffer      数据接收缓冲区地址(void *)
+ * @param[in]   RcvBufferSize   数据接收缓冲区长度(uint32_t)
+ * @param[in]   pSendBuffer     数据发送缓冲区地址(void *)
+ * @param[in]   SendBufferSize  数据发送缓冲区长度(uint32_t)
+ * @retval	    None.
+ */
+void COM_CAN_StructInit(COMInfoTypedef *pModule, CAN_HandleTypeDef *pHCAN,
+                            bool (*pDealData)(void*), bool (*pSendData)(uint8_t),
+                            bool (*pCan_IsHeadData)(void*, uint32_t),
+                            CAN_RxHeaderTypeDef *pRxHeader,
+                            CAN_TxHeaderTypeDef *pTxHeader,
+                            void *pRcvBuffer, uint32_t RcvBufferSize,
+                            void *pSendBuffer, uint32_t SendBufferSize)
 {
-    COM_ModuleID result = COM_NULL;
+    //绑定硬件接口
+    pModule->CanHandle = pHCAN;
+    pModule->COM_type = SPPRTR_CAN;
     
-//如果使用板间CAN
-#if defined(USING_BSP_CAN)
-
-    if(BSP_COM_CAN == CanHandle->Instance)
-    {
-        result = COM_BSP;
-    }
-
-#endif /*  IS_USING_BSP_CAN  */
+    //绑定数据发送接收头结构体
+    pModule->pRxHeader = pRxHeader;
+    pModule->pTxHeader = pTxHeader;
     
-    return result;
+    //绑定数据处理方法
+    pModule->DealData = pDealData;
+    
+    //绑定数据发送方法
+    pModule->SendData = pSendData;
+    
+    //绑定首帧数据处理方法
+    pModule->Can_IsHeadData = pCan_IsHeadData;
+    
+    //绑定接收缓冲区（can为单缓冲）
+    pModule->pRxBuffer[0]   = pRcvBuffer;
+    pModule->pRxBuffer[1]   = pRcvBuffer;
+    pModule->RxBufSize      = RcvBufferSize;
+    pModule->IsRcvingUnhead = false;
+    pModule->RxlengthCnt    = 0;
+    
+    pModule->RxBufFlag      = false;
+    pModule->RxPackRcvCnt   = 0;
+    pModule->RxErrorPackCnt = 0;
+    
+    //绑定发送缓冲区
+    pModule->pTxBuffer = pSendBuffer;
+    pModule->TxBufSize = SendBufferSize;
+    pModule->SendCnt   = 0;
+    
+    //标记已经初始化完成
+    pModule->isInited = true;
+    
+    //复位错误标志及其描述
+    pModule->ErrorCode = COM_NoError;
+    pModule->ErrorDescription = COM_ErrorDescriptions[COM_NoError];
+    
 }
 
-/*******************  END -> Map Of Modules  ***********************/
+/*******************  END -> 默认初始化函数  ***********************/
 
 /*******************  对外的发送接口  ***********************/
+//安全地调用组件直接发送函数
+void SendData_Safely(COMInfoTypedef *pModule, uint8_t SendCMD)
+{
+    //若本通信组件还未初始化过
+    if(false == pModule->isInited)
+    {
+        COM_ModuleErrorHandler(COM_Error_UnInited, pModule);
+    }
+    
+    //调用发送函数
+    pModule->SendData(SendCMD);
+}
 
 //CAN发送任意ID的非格式化数据
 bool COM_CANSendUnformatData(COMInfoTypedef *pModule, CAN_TxHeaderTypeDef *pHeader, uint8_t *pData, uint16_t Size)
@@ -153,7 +213,7 @@ bool COM_SendUnformatData(COMInfoTypedef *pModule, uint8_t *pData, uint32_t Data
     return false;
 }
 
-//信息发送函数
+//信息发送函数，把已经存在于数据缓冲区中的数据进行发送
 bool COM_SendData(COMInfoTypedef *pModule)
 {    
     volatile bool isSendOK = false;

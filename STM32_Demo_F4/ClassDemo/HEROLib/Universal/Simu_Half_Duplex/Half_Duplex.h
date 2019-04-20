@@ -64,7 +64,7 @@ typedef struct
     
 }Hf_DuplexTypedef;
 
-void Hf_DuplexStructDeInit(Hf_DuplexTypedef *pModule);
+void Hf_DuplexStructInit(Hf_DuplexTypedef *pModule, COMInfoTypedef *pCOM, uint32_t ErrorCntMax, void (*pHandler)(void));
 void Hf_HaveReceived(Hf_DuplexTypedef *pModule);
 void Hf_SendData(Hf_DuplexTypedef *pModule, uint8_t CMD);
 void Hf_Reconnect(Hf_DuplexTypedef *pModule);

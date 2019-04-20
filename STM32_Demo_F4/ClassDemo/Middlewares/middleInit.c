@@ -1,4 +1,5 @@
 #include "middleInit.h"
+#include "Com_Functions.h"
 #include "ComToPC.h"
 #include "ComToMaster.h"
 #include "ComToBSP.h"

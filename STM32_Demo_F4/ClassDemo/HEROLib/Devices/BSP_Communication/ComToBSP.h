@@ -2,7 +2,7 @@
 #define COMTOBSP_H
 
 #include "BSP_Data.h"
-#include "Comunication.h"
+#include "Com_Functions.h"
 #include "Half_Duplex.h"
 
 #define USING_BSP_UART

@@ -2,7 +2,7 @@
 #define COMTOMASTER_H
 
 #include "Master_Data.h"
-#include "Comunication.h"
+#include "Com_Functions.h"
 #include "Half_Duplex.h"
 
 //结构体定义：接收数据缓冲区

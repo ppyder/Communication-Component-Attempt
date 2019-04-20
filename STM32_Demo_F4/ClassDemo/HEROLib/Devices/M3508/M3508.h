@@ -2,7 +2,7 @@
 #define _M3508_H_
 
 #include "stm32f4xx_hal.h"
-#include "Comunication.h"
+#include "Com_Functions.h"
 
 extern short Real_C_Value[3];      //电机真实电流值
 extern short Real_V_Value[3];      //电机真实速度值

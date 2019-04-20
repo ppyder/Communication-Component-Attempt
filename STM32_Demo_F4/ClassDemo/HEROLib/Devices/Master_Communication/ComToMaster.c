@@ -1,4 +1,5 @@
 #include "ComToMaster.h"
+#include "Comunication.h"
 #include "MasterDataDeal.h"
 
 //与控制端通信的通信组件实体定义
@@ -19,48 +20,14 @@ static bool SendDataToMstr(uint8_t SendCMD);
 //初始化本接口对应的通信组件
 void Mstr_COM_ModuleInit(COMInfoTypedef *pModule)
 {
-    //复位半双工结构体
-    Hf_DuplexStructDeInit(&Mstr_HfCOM);
-    
-    //设定半双工请求驳回次数上限
-    Mstr_HfCOM.ErrorCntMax = Mstr_REQUEST_ERROR_MAX;
-    
-    //绑定通信组件
-    Mstr_HfCOM.pCOM = pModule;
-    
-    //绑定硬件接口
-    pModule->UartHandle = &Mstr_COM_HUART;
-    
-    //标记所使用的通信载体是串口
-    pModule->COM_type = SPPRTR_UART;
-    
-    //绑定数据处理方法
-    pModule->DealData = DealMstrData;
-    
-    //绑定数据发送方法
-    pModule->SendData = SendDataToMstr;
-    
-    //绑定接收缓冲区
-    pModule->pRxBuffer[0] = Mstr_RxBuffer;
-    pModule->pRxBuffer[1] = Mstr_RxBuffer + 1;
-    pModule->RxBufSize = Mstr_RX_BUFFERSIZE;
-    pModule->Rx_NextRcvLength = Mstr_RX_BUFFERSIZE;
-    pModule->isCorrectHead = false;
-    pModule->RxBufFlag = false;
-    pModule->RxPackRcvCnt = 0;
-    pModule->RxErrorPackCnt = 0;
-    
-    //绑定发送缓冲区
-    pModule->pTxBuffer = &Mstr_TxBuffer;
-    pModule->TxBufSize = sizeof(Mstr_TxBufTypedef);
-    pModule->SendCnt = 0;
-    
-    //标记已经初始化完成
-    pModule->isInited = true;
-    
-    //复位错误标志及其描述
-    pModule->ErrorCode = COM_NoError;
-    pModule->ErrorDescription = COM_ErrorDescriptions[COM_NoError];
+    //初始化半双工结构体，绑定通信组件，不使用阻塞处理
+    Hf_DuplexStructInit(&Mstr_HfCOM, pModule, Mstr_REQUEST_ERROR_MAX, NULL);
+        
+    //以串口方式初始化通信组件
+    COM_UART_StructInit(pModule, &Mstr_COM_HUART,
+                        DealMstrData, SendDataToMstr,
+                        Mstr_RxBuffer, Mstr_RX_BUFFERSIZE,
+                        &Mstr_TxBuffer, sizeof(Mstr_TxBufTypedef));
     
     /* 使能接收，进入中断回调函数 */
     HAL_UART_Receive_IT(&Mstr_COM_HUART, 

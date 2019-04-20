@@ -1,4 +1,5 @@
 #include "ComToPC.h"
+#include "Comunication.h"
 
 //与小电脑通信的通信组件实体定义
 COMInfoTypedef PC_COM_Module = {0};
@@ -21,41 +22,13 @@ static bool SendDataToPC(uint8_t SendCMD);
 static void GetMsgFromPCBuffer(PC_RxBufTypedef *pBuffer);
 
 //初始化本接口对应的通信组件
-void PC_COM_ModuleInit(volatile COMInfoTypedef *pModule)
+void PC_COM_ModuleInit(COMInfoTypedef *pModule)
 {
-    //绑定硬件接口
-    pModule->UartHandle = &PC_COM_HUART;
-    
-    //标记所使用的是串口
-    pModule->COM_type = SPPRTR_UART;
-    
-    //绑定数据处理方法
-    pModule->DealData = DealPCData;
-    
-    //绑定数据发送方法
-    pModule->SendData = SendDataToPC;
-    
-    //绑定接收缓冲区
-    pModule->pRxBuffer[0] = PC_RxBuffer;
-    pModule->pRxBuffer[1] = PC_RxBuffer + 1;
-    pModule->RxBufSize = PC_RX_BUFFERSIZE;
-    pModule->Rx_NextRcvLength = PC_RX_BUFFERSIZE;
-    pModule->isCorrectHead = false;
-    pModule->RxBufFlag = false;
-    pModule->RxPackRcvCnt = 0;
-    pModule->RxErrorPackCnt = 0;
-    
-    //绑定发送缓冲区
-    pModule->pTxBuffer = &PC_TxBuffer;
-    pModule->TxBufSize = sizeof(PC_TxBufTypedef);
-    pModule->SendCnt = 0;
-    
-    //标记已经初始化完成
-    pModule->isInited = true;
-    
-    //复位错误标志及其描述
-    pModule->ErrorCode = COM_NoError;
-    pModule->ErrorDescription = COM_ErrorDescriptions[COM_NoError];
+    //以串口形式初始化通信组件
+    COM_UART_StructInit(pModule, &PC_COM_HUART,
+                        DealPCData, SendDataToPC,
+                        PC_RxBuffer, PC_RX_BUFFERSIZE,
+                        &PC_TxBuffer, sizeof(PC_TxBufTypedef));      
     
     /* 使能接收，进入中断回调函数 */
 //    HAL_UART_Receive_IT(&PC_COM_HUART, 
