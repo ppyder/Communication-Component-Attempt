@@ -15,8 +15,8 @@ void COM_ModuleErrorHandler(COM_ErrorCode ErrorCode, COMInfoTypedef *pModule);
 
 //CAN单次数据头缓存
 CAN_RxHeaderTypeDef RxHeader;
-//CAN单次数据接收缓存
-uint8_t CANDataBuf[8] = {0};
+//CAN单次数据接收缓存,前8个字用于存储数据，后四个字用于存储数据ID
+uint8_t CANDataBuf[12] = {0};
 
 /*******************  默认初始化函数  ***********************/
 /**
@@ -302,15 +302,18 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
 //CAN接收完成的回调函数
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *CanHandle)
 {
-    //获取通信组件号
-    COM_ModuleID COM_Type = CAN_DealFuncMap(CanHandle);
+    COM_ModuleID COM_Type = COM_NULL;
     CAN_DataID DataID;
+    uint32_t *pIDBuffer = (uint32_t *)(CANDataBuf + 8);
     
     //从外设处获取数据本次接收的数据帧
     HAL_CAN_GetRxMessage(CanHandle, CAN_RX_FIFO0, &RxHeader, CANDataBuf);
     
-    //获取接收到的信息类型
-    DataID = CAN_StdIDMap(&RxHeader);
+    //将ID写入缓冲区
+    (*pIDBuffer) = RxHeader.StdId;
+    
+    //获取通信组件号
+    COM_Type = CAN_DealFuncMap(CanHandle, &RxHeader, &DataID);
     
     if(COM_NULL == COM_Type)
     {

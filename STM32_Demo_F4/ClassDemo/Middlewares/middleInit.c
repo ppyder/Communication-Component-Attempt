@@ -1,5 +1,5 @@
 #include "middleInit.h"
-#include "Com_Functions.h"
+#include "ComToCAN_Dev.h"
 #include "ComToPC.h"
 #include "ComToMaster.h"
 #include "ComToBSP.h"
@@ -12,6 +12,9 @@ void COM_ModulesInit(void)
     
     //初始化与控制端的通信组件
     Mstr_COM_ModuleInit(COM_Modules[COM_MSTR]);
+    
+    //初始化与CAN1单帧通信设备的通信组件
+    DevGroup1_COM_ModuleInit(COM_Modules[COM_DevGroup1]);
     
     //初始化与其他控制板的通信组件
     //BSP_COM_ModuleInit(COM_Modules[COM_BSP]);

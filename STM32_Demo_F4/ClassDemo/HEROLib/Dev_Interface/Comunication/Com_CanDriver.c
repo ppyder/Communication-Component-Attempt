@@ -20,6 +20,13 @@
 //CAN发送邮箱状态指示(是否空闲)
 bool isTxMailBoxFree[3] = {true, true, true};
 
+//can数据处理函数集合
+void (*pCANDataDealFuncs[CAN_IDsNum])(uint8_t *pData, uint32_t DataLength, COM_ModuleID COM_Type) = 
+{
+    RcvFormatCanData,   //格式化数据接收
+    RcvUnformatCanData, //非格式化数据接收
+};
+
 //CAN接收滤波器初始化函数
 void CAN_Filter_Config(CAN_HandleTypeDef* hcan)
 {
@@ -152,32 +159,6 @@ void DataCopy(uint8_t *pTarget, const uint8_t *pSource, uint32_t DataSize)
     return;
 }
 
-//获得所接收的数据类型(格式化数据/非格式化的哪一类)
-CAN_DataID CAN_StdIDMap(CAN_RxHeaderTypeDef *pHeader)
-{
-    CAN_DataID Result;
-    uint32_t Cnt = 0, StdID = pHeader->StdId;
-    
-    //遍历查询ID
-    for(Cnt = 0; Cnt < CAN_IDsNum; Cnt++)
-    {
-        if(CAN_FormatStdIDs[Cnt] == StdID)
-        {
-            Result = CAN_FormatData;
-            break;
-        }
-        else if(CAN_UnformatStdIDs[Cnt] == StdID)
-        {
-            // @CAN_DataID 中 CAN_FormatData 标号为0，
-            //因此非格式化数据对应的枚举值应为查询所得的数组下标加一
-            Result = (CAN_DataID)(Cnt + 1);
-            break;
-        }
-    }
-    
-    return Result;
-}
-
 //对一个可能是头的数据帧进行处理
 void DealHeadData(uint8_t *pData, uint32_t DataLength, COM_ModuleID COM_Type)
 {
@@ -248,6 +229,13 @@ void RcvFormatCanData(uint8_t *pData, uint32_t DataLength, COM_ModuleID COM_Type
         DealHeadData(pData, DataLength, COM_Type);
         return;
     }        
+}
+
+//接收设备数据
+void RcvUnformatCanData(uint8_t *pData, uint32_t DataLength, COM_ModuleID COM_Type)
+{
+    //直接转交数据到对应的处理函数
+    COM_Modules[COM_Type]->DealData(pData);
 }
 
 /***********************  END -> 接收数据处理  ***************************/

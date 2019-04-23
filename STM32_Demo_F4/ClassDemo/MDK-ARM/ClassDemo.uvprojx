@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F429xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;     ../Drivers/STM32F4xx_HAL_Driver/Inc;     ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;     ../Drivers/CMSIS/Device/ST/STM32F4xx/Include;     ../Drivers/CMSIS/Include;     ..\HEROLib\Dev_Interface\Comunication;     ..\HEROLib\Universal;     ..\HEROLib\Universal\Controller;     ..\HEROLib\Universal\Filter;     ..\HEROLib\Universal\SignalGenerator;     ..\HEROLib\Universal\Simu_Half_Duplex;     ..\HEROLib\Devices\M3508;     ..\HEROLib\Devices\Master_Communication;     ..\HEROLib\Devices\PC_Communication;     ..\HEROLib\Devices\BSP_Communication;     ..\HEROLib\DebugSupport\TestController;     ..\Middlewares;     ..\Applications</IncludePath>
+              <IncludePath>../Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;..\HEROLib\Dev_Interface\Comunication;..\HEROLib\Universal;..\HEROLib\Universal\Controller;..\HEROLib\Universal\Filter;..\HEROLib\Universal\SignalGenerator;..\HEROLib\Universal\Simu_Half_Duplex;..\HEROLib\Devices\M3508;..\HEROLib\Devices\Master_Communication;..\HEROLib\Devices\PC_Communication;..\HEROLib\Devices\BSP_Communication;..\HEROLib\DebugSupport\TestController;..\Middlewares;..\Middlewares\CAN_Devices;..\Applications</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -599,6 +599,11 @@
               <FileName>MasterDataDeal.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HEROLib\Devices\Master_Communication\MasterDataDeal.c</FilePath>
+            </File>
+            <File>
+              <FileName>ComToCAN_Dev.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Middlewares\CAN_Devices\ComToCAN_Dev.c</FilePath>
             </File>
             <File>
               <FileName>M3508.c</FileName>
