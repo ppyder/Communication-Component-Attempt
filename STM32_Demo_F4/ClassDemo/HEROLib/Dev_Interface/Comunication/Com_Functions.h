@@ -8,6 +8,12 @@
   * 用的时候才可以保证其使用安全性。
   *     当然，在确保安全的情况下，你也完全可以直接调用其中的函数。
   *
+  *     另外，通信组件中重定向了fputc函数，这意味着你可以通过某个组件对字符串基于
+  * 通信接口进行信息打印，在宏 @COM_PRINTF_ID 处指定用于打印的通信组件号即可。并且
+  * 约定，每个字符串必须以换行符 '\n'作为结束标志，因为组件还具备发送格式化数据的
+  * 功能。由于fputc是一个字符一个字符发出去的，为了防止单个的打印字符与格式化信息
+  * 混在一起发送，因此做了发送互斥标志，而识别字符串结束的标志就是遇到'\n'字符。
+  *
   * <h2><center>&copy; Copyright (C) HITwh Excellent Robot Organization(HERO). 2015-2018.</center></h2>
   *
   * + 当需要用到通信组件时，需要进行以下操作：
@@ -64,7 +70,7 @@ void COM_CAN_StructInit(COMInfoTypedef *pModule, CAN_HandleTypeDef *pHCAN,
 
 //数据发送函数
 bool COM_SendUnformatData(COMInfoTypedef *pModule, uint8_t *pData, uint32_t DataSzie);
-bool COM_CANSendUnformatData(COMInfoTypedef *pModule, CAN_TxHeaderTypeDef *pHeader, uint8_t *pData, uint16_t Size);
+bool COM_CANSendUnformatIDData(COMInfoTypedef *pModule, CAN_TxHeaderTypeDef *pHeader, uint8_t *pData, uint16_t Size);
 void SendData_Safely(COMInfoTypedef *pModule, uint8_t SendCMD);
 
 #endif

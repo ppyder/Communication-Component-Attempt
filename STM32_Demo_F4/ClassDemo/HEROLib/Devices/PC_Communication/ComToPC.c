@@ -198,5 +198,5 @@ static bool SendDataToPC(uint8_t SendCMD)
                                             PC_COM_Module.TxBufSize - sizeof(TxBuffer->Tail));
     
     //返回是否发送成功
-    return COM_SendData(&PC_COM_Module);
+    return COM_SendDataInTxBuffer(&PC_COM_Module);
 }

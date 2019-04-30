@@ -47,6 +47,7 @@
 
 /* USER CODE BEGIN Includes */
 #include "middleInit.h"
+#include "ComToMaster.h"
 #include <string.h>
 /* USER CODE END Includes */
 
@@ -108,13 +109,16 @@ int main(void)
 
   /* Initialize interrupts */
   MX_NVIC_Init();
-  /* USER CODE BEGIN 2 */
-  //配置滤波器  
+  /* USER CODE BEGIN 2 */  
+  //说明：使用的通信基础是串口2  
+  COM_ModulesInit();
+  
+  printf("Hello!欢迎使用！\n");
+  printf("$CHART,%lf,%lf,%lf\n", 0.01, 0.02, 0.03);
+  
   HAL_TIM_Base_Start_IT(&htim6);
   HAL_TIM_Base_Start_IT(&htim7);
   
-  //说明：使用的通信基础是串口2  
-  COM_ModulesInit();
   
   /* USER CODE END 2 */
 

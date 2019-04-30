@@ -167,7 +167,7 @@ static bool DealDevGroup2Data(void *pRxBuffer)
 static bool SendDataToDevGroup1(uint8_t SendCMD)
 {
     //返回是否发送成功
-    return COM_SendData(&DevGroup1_COM_Module);
+    return COM_SendDataInTxBuffer(&DevGroup1_COM_Module);
 }
 
 //向属于设备组2的设备发送数据，默认发送前已经把数据赋好值了。
@@ -175,6 +175,6 @@ static bool SendDataToDevGroup1(uint8_t SendCMD)
 static bool SendDataToDevGroup2(uint8_t SendCMD)
 {
     //返回是否发送成功
-    return COM_SendData(&DevGroup2_COM_Module);
+    return COM_SendDataInTxBuffer(&DevGroup2_COM_Module);
 }
 

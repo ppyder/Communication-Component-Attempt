@@ -1,6 +1,8 @@
 #ifndef COMMUNICATION_H
 #define COMMUNICATION_H
 
+#include <stdio.h>
+
 #include "ComStructDef.h"
 #include "usart.h"
 #include "can.h"
@@ -16,6 +18,6 @@ extern char *COM_ErrorDescriptions[COM_ErrorCodeNum];
 #define NULL_MESSAGE 0
 
 //数据发送函数（直接发送已经存在于缓冲区中的数据）
-bool COM_SendData(COMInfoTypedef *pModule);
+bool COM_SendDataInTxBuffer(COMInfoTypedef *pModule);
 
 #endif

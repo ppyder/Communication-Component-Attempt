@@ -225,7 +225,7 @@ static bool SendDataToBSP(uint8_t SendCMD)
                                             BSP_COM_Module.TxBufSize - sizeof(TxBuffer->Tail));
     
     //本次将消息发出后进入等待状态
-    if(true == COM_SendData(&BSP_COM_Module))
+    if(true == COM_SendDataInTxBuffer(&BSP_COM_Module))
     {
         //记录本次发出的信息类型
         BSP_TxMsgTypeSaved = (enum BSP_TxMsgTypes)SendCMD;
@@ -385,7 +385,7 @@ static bool SendDataToBSP(uint8_t SendCMD)
                                             BSP_COM_Module.TxBufSize - sizeof(TxBuffer->Tail));
     
     //本次将消息发出后进入等待状态
-    if(true == COM_SendData(&BSP_COM_Module))
+    if(true == COM_SendDataInTxBuffer(&BSP_COM_Module))
     {
         //记录本次发出的信息类型
         BSP_TxMsgTypeSaved = (enum BSP_TxMsgTypes)SendCMD;

@@ -62,6 +62,7 @@
             this.lb_TestKp = new System.Windows.Forms.Label();
             this.lb_RequestError = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.lb_testString = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnSOpen
@@ -213,7 +214,7 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 170);
+            this.label2.Location = new System.Drawing.Point(17, 205);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 12);
             this.label2.TabIndex = 40;
@@ -225,7 +226,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(17, 227);
+            this.label3.Location = new System.Drawing.Point(17, 262);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(83, 12);
             this.label3.TabIndex = 41;
@@ -235,7 +236,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(17, 199);
+            this.label4.Location = new System.Drawing.Point(17, 234);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 12);
             this.label4.TabIndex = 42;
@@ -245,7 +246,7 @@
             // 
             this.lb_PackReceivedNum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lb_PackReceivedNum.AutoSize = true;
-            this.lb_PackReceivedNum.Location = new System.Drawing.Point(100, 199);
+            this.lb_PackReceivedNum.Location = new System.Drawing.Point(100, 234);
             this.lb_PackReceivedNum.Name = "lb_PackReceivedNum";
             this.lb_PackReceivedNum.Size = new System.Drawing.Size(35, 12);
             this.lb_PackReceivedNum.TabIndex = 43;
@@ -257,7 +258,7 @@
             this.lb_ErrorPackNum.AutoSize = true;
             this.lb_ErrorPackNum.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lb_ErrorPackNum.ForeColor = System.Drawing.Color.Red;
-            this.lb_ErrorPackNum.Location = new System.Drawing.Point(100, 227);
+            this.lb_ErrorPackNum.Location = new System.Drawing.Point(100, 262);
             this.lb_ErrorPackNum.Name = "lb_ErrorPackNum";
             this.lb_ErrorPackNum.Size = new System.Drawing.Size(39, 12);
             this.lb_ErrorPackNum.TabIndex = 44;
@@ -267,7 +268,7 @@
             // 
             this.lb_ByteReceivedNum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lb_ByteReceivedNum.AutoSize = true;
-            this.lb_ByteReceivedNum.Location = new System.Drawing.Point(100, 170);
+            this.lb_ByteReceivedNum.Location = new System.Drawing.Point(100, 205);
             this.lb_ByteReceivedNum.Name = "lb_ByteReceivedNum";
             this.lb_ByteReceivedNum.Size = new System.Drawing.Size(53, 12);
             this.lb_ByteReceivedNum.TabIndex = 45;
@@ -326,7 +327,7 @@
             this.Richtb_Remark.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.Richtb_Remark.Location = new System.Drawing.Point(205, 150);
             this.Richtb_Remark.Name = "Richtb_Remark";
-            this.Richtb_Remark.Size = new System.Drawing.Size(142, 68);
+            this.Richtb_Remark.Size = new System.Drawing.Size(142, 103);
             this.Richtb_Remark.TabIndex = 49;
             this.Richtb_Remark.Text = "(详情...)";
             this.Richtb_Remark.TextChanged += new System.EventHandler(this.Richtb_Remark_TextChanged);
@@ -336,7 +337,7 @@
             // btn_ClearCounter
             // 
             this.btn_ClearCounter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_ClearCounter.Location = new System.Drawing.Point(145, 222);
+            this.btn_ClearCounter.Location = new System.Drawing.Point(145, 257);
             this.btn_ClearCounter.Name = "btn_ClearCounter";
             this.btn_ClearCounter.Size = new System.Drawing.Size(45, 23);
             this.btn_ClearCounter.TabIndex = 50;
@@ -347,7 +348,7 @@
             // btn_ClearRemark
             // 
             this.btn_ClearRemark.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_ClearRemark.Location = new System.Drawing.Point(302, 222);
+            this.btn_ClearRemark.Location = new System.Drawing.Point(302, 257);
             this.btn_ClearRemark.Name = "btn_ClearRemark";
             this.btn_ClearRemark.Size = new System.Drawing.Size(45, 23);
             this.btn_ClearRemark.TabIndex = 51;
@@ -390,7 +391,7 @@
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(25, 254);
+            this.label7.Location = new System.Drawing.Point(25, 289);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(53, 12);
             this.label7.TabIndex = 54;
@@ -400,7 +401,7 @@
             // 
             this.lb_TestKp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lb_TestKp.AutoSize = true;
-            this.lb_TestKp.Location = new System.Drawing.Point(84, 254);
+            this.lb_TestKp.Location = new System.Drawing.Point(84, 289);
             this.lb_TestKp.Name = "lb_TestKp";
             this.lb_TestKp.Size = new System.Drawing.Size(53, 12);
             this.lb_TestKp.TabIndex = 55;
@@ -410,7 +411,7 @@
             // 
             this.lb_RequestError.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lb_RequestError.AutoSize = true;
-            this.lb_RequestError.Location = new System.Drawing.Point(272, 254);
+            this.lb_RequestError.Location = new System.Drawing.Point(272, 289);
             this.lb_RequestError.Name = "lb_RequestError";
             this.lb_RequestError.Size = new System.Drawing.Size(53, 12);
             this.lb_RequestError.TabIndex = 57;
@@ -420,17 +421,28 @@
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(165, 254);
+            this.label9.Location = new System.Drawing.Point(165, 289);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(101, 12);
             this.label9.TabIndex = 56;
             this.label9.Text = "RequestErrorCnt:";
             // 
+            // lb_testString
+            // 
+            this.lb_testString.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lb_testString.AutoSize = true;
+            this.lb_testString.Location = new System.Drawing.Point(17, 167);
+            this.lb_testString.Name = "lb_testString";
+            this.lb_testString.Size = new System.Drawing.Size(65, 12);
+            this.lb_testString.TabIndex = 58;
+            this.lb_testString.Text = "TestString";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(359, 275);
+            this.ClientSize = new System.Drawing.Size(359, 310);
+            this.Controls.Add(this.lb_testString);
             this.Controls.Add(this.lb_RequestError);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.lb_TestKp);
@@ -505,6 +517,7 @@
         private System.Windows.Forms.Label lb_TestKp;
         private System.Windows.Forms.Label lb_RequestError;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lb_testString;
     }
 }
 

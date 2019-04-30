@@ -12,6 +12,7 @@ char *COM_ErrorDescriptions[COM_ErrorCodeNum] =
 
 /* 私有函数声明 */
 void COM_ModuleErrorHandler(COM_ErrorCode ErrorCode, COMInfoTypedef *pModule);
+static bool COM_SendData_Unsafe(COMInfoTypedef *pModule, void *pData, uint32_t DataSzie);
 
 //CAN单次数据头缓存
 CAN_RxHeaderTypeDef RxHeader;
@@ -68,6 +69,9 @@ void COM_UART_StructInit(COMInfoTypedef *pModule, UART_HandleTypeDef *pHuart,
     
     //标记已经初始化完成
     pModule->isInited = true;
+    
+    //复位状态标志
+    pModule->isPrintingData = false;
     
     //复位错误标志及其描述
     pModule->ErrorCode = COM_NoError;
@@ -134,6 +138,9 @@ void COM_CAN_StructInit(COMInfoTypedef *pModule, CAN_HandleTypeDef *pHCAN,
     //标记已经初始化完成
     pModule->isInited = true;
     
+    //复位状态标志
+    pModule->isPrintingData = false;
+    
     //复位错误标志及其描述
     pModule->ErrorCode = COM_NoError;
     pModule->ErrorDescription = COM_ErrorDescriptions[COM_NoError];
@@ -151,21 +158,30 @@ void SendData_Safely(COMInfoTypedef *pModule, uint8_t SendCMD)
     {
         COM_ModuleErrorHandler(COM_Error_UnInited, pModule);
     }
-    
-    //调用发送函数
-    pModule->SendData(SendCMD);
+    else if(pModule->isPrintingData)  //如果正在打印数据
+    {
+        //什么也不做
+    }
+    else
+    {
+        //调用发送函数
+        pModule->SendData(SendCMD);
+    }
 }
 
 //CAN发送任意ID的非格式化数据
-bool COM_CANSendUnformatData(COMInfoTypedef *pModule, CAN_TxHeaderTypeDef *pHeader, uint8_t *pData, uint16_t Size)
+bool COM_CANSendUnformatIDData(COMInfoTypedef *pModule, CAN_TxHeaderTypeDef *pHeader, uint8_t *pData, uint16_t Size)
 {
     //若本通信组件还未初始化过
     if(false == pModule->isInited)
     {
         COM_ModuleErrorHandler(COM_Error_UnInited, pModule);
     }
-    
-    if(Can_SendData(pModule->CanHandle, pModule->pTxHeader, pData, Size))
+    else if(pModule->isPrintingData)  //如果正在打印数据
+    {
+        //什么也不做
+    }
+    else if(Can_SendData(pModule->CanHandle, pModule->pTxHeader, pData, Size))
     {
         //记录发送次数
         pModule->SendCnt++;
@@ -175,7 +191,7 @@ bool COM_CANSendUnformatData(COMInfoTypedef *pModule, CAN_TxHeaderTypeDef *pHead
     return false;
 }
 
-//以指定ID发送非格式化数据
+//发送非格式化数据
 bool COM_SendUnformatData(COMInfoTypedef *pModule, uint8_t *pData, uint32_t DataSzie)
 {
     //若本通信组件还未初始化过
@@ -183,68 +199,11 @@ bool COM_SendUnformatData(COMInfoTypedef *pModule, uint8_t *pData, uint32_t Data
     {
         COM_ModuleErrorHandler(COM_Error_UnInited, pModule);
     }
-    
-    //调用底层库发送函数
-    switch(pModule->COM_type)
+    else if(pModule->isPrintingData)  //如果正在打印数据
     {
-        case SPPRTR_UART:
-            if(HAL_UART_Transmit_DMA(pModule->UartHandle, pData, DataSzie))
-            {
-                //记录发送次数
-                pModule->SendCnt++;
-                
-                return true;
-            }
-            break;
-        
-        case SPPRTR_CAN:
-            if(Can_SendData(pModule->CanHandle, pModule->pTxHeader, pData, DataSzie))
-            {
-                //记录发送次数
-                pModule->SendCnt++;
-                
-                return true;
-            }
-            break;
-        
-        default:break;
+        //什么也不做
     }
-    
-    return false;
-}
-
-//信息发送函数，把已经存在于数据缓冲区中的数据进行发送
-bool COM_SendData(COMInfoTypedef *pModule)
-{    
-    volatile bool isSendOK = false;
-    
-    //若本通信组件还未初始化过
-    if(false == pModule->isInited)
-    {
-        COM_ModuleErrorHandler(COM_Error_UnInited, pModule);
-    }
-    
-    //调用底层库发送函数
-    switch(pModule->COM_type)
-    {
-        case SPPRTR_UART:
-            isSendOK = (HAL_OK == HAL_UART_Transmit_DMA(pModule->UartHandle, 
-                                    pModule->pTxBuffer,
-                                    pModule->TxBufSize));
-            break;
-        
-        case SPPRTR_CAN:
-            isSendOK = Can_SendData(pModule->CanHandle,
-                            pModule->pTxHeader,
-                            pModule->pTxBuffer,  
-                            pModule->TxBufSize);
-            
-            break;
-        
-        default:break;
-    }
-    
-    if(isSendOK)
+    else if(true == COM_SendData_Unsafe(pModule, pData, DataSzie))
     {
         //记录发送次数
         pModule->SendCnt++;
@@ -253,6 +212,80 @@ bool COM_SendData(COMInfoTypedef *pModule)
     }
     
     return false;
+}
+
+//在不检查是否初始化的前提下进行数据发送,返回是否发送成功
+static bool COM_SendData_Unsafe(COMInfoTypedef *pModule, void *pData, uint32_t DataSzie)
+{
+    //调用底层库发送函数
+    switch(pModule->COM_type)
+    {
+        case SPPRTR_UART:
+            return HAL_OK == HAL_UART_Transmit_DMA(pModule->UartHandle, pData, DataSzie);
+        
+        case SPPRTR_CAN:
+            return true == Can_SendData(pModule->CanHandle, pModule->pTxHeader, pData, DataSzie);
+        
+        default:break;
+    }
+    
+    return false;
+}
+
+//信息发送函数，把已经存在于数据缓冲区中的数据进行发送,仅允许在组件内部的数据发送函数中被调用
+bool COM_SendDataInTxBuffer(COMInfoTypedef *pModule)
+{        
+    //若本通信组件还未初始化过
+    if(false == pModule->isInited)
+    {
+        COM_ModuleErrorHandler(COM_Error_UnInited, pModule);
+    }
+    
+    //调用发送函数
+    if(true == COM_SendData_Unsafe(pModule, pModule->pTxBuffer, pModule->TxBufSize))
+    {
+        //记录发送次数
+        pModule->SendCnt++;
+        
+        return true;
+    }
+        
+    return false;
+}
+
+uint32_t isBlockedCnt = 0;
+
+//重定向fputc函数以使用printf函数
+int fputc(int ch, FILE* stream) 
+{
+    volatile bool isBlocked = false;
+    uint8_t Send_ch = (uint8_t)ch;
+    
+    //若本通信组件还未初始化过
+    if(false == COM_Modules[COM_PRINTF_ID]->isInited)
+    {
+        COM_ModuleErrorHandler(COM_Error_UnInited, COM_Modules[COM_PRINTF_ID]);
+    }
+    
+    COM_Modules[COM_PRINTF_ID]->isPrintingData = true;
+    
+    //等待直到发送不阻塞
+    while(HAL_UART_STATE_BUSY_TX == (HAL_UART_STATE_BUSY_TX & COM_Modules[COM_PRINTF_ID]->UartHandle->gState))
+    {
+        isBlockedCnt++;
+    }
+    
+    //单字发送
+    if(true == COM_SendData_Unsafe(COM_Modules[COM_PRINTF_ID], &Send_ch, 1))
+    {
+        //记录发送次数
+        COM_Modules[COM_PRINTF_ID]->SendCnt++;
+    }
+    
+    //判断有没有发送完,约定以换行符'\n'为字符串结束的标志。
+    COM_Modules[COM_PRINTF_ID]->isPrintingData = ('\n' != Send_ch);
+    
+    return ch; 
 }
 
 /*******************  END -> 对外的发送接口  ***********************/

@@ -46,6 +46,9 @@ typedef enum
     
 }CAN_DataID;
 
+//定义和标记用于printf的通信组件标号
+#define COM_PRINTF_ID COM_MSTR
+
 //便于集中管理的通信组件集合
 extern COMInfoTypedef *COM_Modules[COM_ModulesNum];
 

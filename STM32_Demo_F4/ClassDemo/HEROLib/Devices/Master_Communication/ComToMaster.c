@@ -203,7 +203,7 @@ static bool SendDataToMstr(uint8_t SendCMD)
                                             Mstr_COM_Module.TxBufSize - sizeof(TxBuffer->Tail));
 
     //本次将消息发出后进入等待状态
-    if(true == COM_SendData(&Mstr_COM_Module))
+    if(true == COM_SendDataInTxBuffer(&Mstr_COM_Module))
     {
         //记录本次发出的信息类型
         TxMsgTypeSaved = (enum Mstr_TxMsgTypes)SendCMD;

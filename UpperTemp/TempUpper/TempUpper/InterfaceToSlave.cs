@@ -367,6 +367,8 @@ namespace TempUpper
             {
                 //单个字符检索
                 GetFormatData(Data);
+
+                GetScopeData(Data);
             }
                         
             //如果使能任意数据接收
@@ -447,6 +449,48 @@ namespace TempUpper
                 DealFormatReceived(Rx_Buffer);
                 BufferIndex = 0;
             }
+        }
+
+        //处理示波器数据
+        private void GetScopeData(byte Data)
+        {
+            //识别字符串
+            bool isInvalid = false;    //标识本次接受的数据是否非法
+
+            //在数据头处逐字检查以确保数据头被合理捕获
+            if(Datas.ScopeDataCnt < Datas.ScopeDataHead.Length)
+            {
+                isInvalid = (Data != Datas.ScopeDataHead[Datas.ScopeDataCnt]);
+            }
+
+            if(isInvalid)
+            {
+                Datas.ScopeDataCnt = 0;
+                Datas.ScopeData = "";
+            }
+            else
+            {
+                Datas.ScopeData += (char)Data;           //按字符格式显示
+                Datas.ScopeDataCnt++;
+
+                //如果到了数据尾
+                if(Data == Datas.ScopeDataTail)
+                {
+                    //调用数据处理回调函数
+                    if (null == Datas.ScopeDataHandler)
+                    {
+                        throw new Exception("<调用示波器数据处理函数>：未初始化数据处理委托！请先调用函数\"PIDDataHandlerInit\"以初始化！");
+                    }
+                    else
+                    {
+                        Datas.ScopeDataHandler(Datas.ScopeData);
+                    }
+
+                    Datas.ScopeData = "";
+                    Datas.ScopeDataCnt = 0;
+                }
+            }
+            
         }
 
         //处理任意数据

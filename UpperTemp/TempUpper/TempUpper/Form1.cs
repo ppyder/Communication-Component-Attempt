@@ -464,6 +464,20 @@ namespace TempUpper
             }
         }
 
+        private void DealScopeData(string Data)
+        {
+            if (this.InvokeRequired)
+            {
+                //在此使窗体主线程异步地重新调用委托
+                BeginInvoke(Datas.ScopeDataHandler, Data);
+            }
+            else
+            {
+                //在此写入实际修改窗体控件的操作
+                lb_testString.Text = Data;
+            }
+        }
+
         //程序初始化时进行的操作
         private void InitProgram()
         {
@@ -483,6 +497,9 @@ namespace TempUpper
 
             //初始化处理方法
             Datas.SampleHandlerInit(new UserDatas.SampleDataHandlerTypedef(DealSampleData));
+
+            //初始化处理方法
+            Datas.ScopeHandlerInit(new UserDatas.ScopeDataHandlerTypedef(DealScopeData));
 
 
         }

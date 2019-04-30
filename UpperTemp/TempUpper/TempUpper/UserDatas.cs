@@ -268,6 +268,16 @@ namespace TempUpper
             SampleDataHandler = Handler;
         }
 
+        //示波器数据处理委托
+        public delegate void ScopeDataHandlerTypedef(string Data);
+        //委托实体字段
+        public ScopeDataHandlerTypedef ScopeDataHandler = null;
+        //初始化委托
+        public void ScopeHandlerInit(ScopeDataHandlerTypedef Handler)
+        {
+            ScopeDataHandler = Handler;
+        }
+
         //PID数据回传处理委托
         public delegate void PIDDataHandlerTypedef(PIDDataGetTypedef Data);
         //委托实体字段

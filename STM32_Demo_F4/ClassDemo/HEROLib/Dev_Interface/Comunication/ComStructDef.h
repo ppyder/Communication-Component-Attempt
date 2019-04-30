@@ -60,6 +60,9 @@ typedef struct
     //标记本组件是否被初始化过，用以做安全保护，不然极易因访问禁止区域而进入HardFault。
     bool isInited;
     
+    //当组件被用于作为printf的输出流组件时，标记是否正在打印，打印期间禁止发送其他数据。
+    bool isPrintingData;
+    
     //接收缓冲区地址(预留双缓冲)
     void *pRxBuffer[2];
     

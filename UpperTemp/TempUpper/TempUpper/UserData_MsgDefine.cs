@@ -1,4 +1,5 @@
-﻿
+﻿using System.Collections.Generic;
+
 
 namespace TempUpper
 {
@@ -323,7 +324,20 @@ namespace TempUpper
 
         #region 常量和枚举标识
 
+        //格式化数据头
         public const byte Datahead1 = 0xaa, Datahead2 = 0xbb;
+
+        //约定的示波器使用的数据头是字符串"$CHART",结束标志是换行符'\n'。
+        public byte[] ScopeDataHead = 
+            {
+                (byte)'$',
+                (byte)'C',
+                (byte)'H',
+                (byte)'A',
+                (byte)'R',
+                (byte)'T',
+            };
+        public byte ScopeDataTail = (byte)'\n';
 
         //通信数据类型标识集合（发送和接收分别从0开始，一一对应）
         public enum MsgTypesID
@@ -387,6 +401,10 @@ namespace TempUpper
         //接收到的状态参量公示(未公示的接收参量将在接收回调中得到处理)
         public SampleData               Rx_SampleData = new SampleData(); //此状态量也会在回调中被处理
         public Mr1State                 Rx_MR1State = new Mr1State();
+
+        //示波器数据接收处理
+        public string ScopeData = "";
+        public int ScopeDataCnt = 0;
 
         private byte EmptyTxBuffer = new byte();
 
